@@ -15,7 +15,11 @@ class CreateFeaturesTable extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('feature_group_id');
+            $table->string('name');
             $table->timestamps();
+
+            $table->foreign('feature_group_id')->references('id')->on('feature_groups')->onDelete('cascade');
         });
     }
 

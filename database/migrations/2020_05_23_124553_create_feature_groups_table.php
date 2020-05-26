@@ -15,6 +15,7 @@ class CreateFeatureGroupsTable extends Migration
     {
         Schema::create('feature_groups', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
