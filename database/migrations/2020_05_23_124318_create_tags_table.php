@@ -1,5 +1,6 @@
 <?php
 
+use App\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ class CreateTagsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->boolean('type')->default(Tag::PRODUCT_TAG);
             $table->timestamps();
         });
     }

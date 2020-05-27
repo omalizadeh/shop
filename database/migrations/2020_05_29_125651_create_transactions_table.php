@@ -19,7 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedInteger('amount');
-            $table->unsignedTinyInteger('status')->default(Transaction::PENDING);
+            $table->string('bank_transaction_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
