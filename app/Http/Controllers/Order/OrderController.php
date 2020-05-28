@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Order;
 
-use App\Province;
+use App\Http\Controllers\Controller;
+use App\Order;
 use Illuminate\Http\Request;
 
-class ProvinceController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class ProvinceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Province  $province
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Province $province)
+    public function show(Order $order)
     {
         //
     }
@@ -52,10 +53,10 @@ class ProvinceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Province  $province
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Province $province)
+    public function edit(Order $order)
     {
         //
     }
@@ -64,10 +65,10 @@ class ProvinceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Province  $province
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Province $province)
+    public function update(Request $request, Order $order)
     {
         //
     }
@@ -75,10 +76,10 @@ class ProvinceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Province  $province
+     * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Province $province)
+    public function destroy(Order $order)
     {
         //
     }

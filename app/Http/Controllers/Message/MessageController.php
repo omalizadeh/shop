@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Message;
 
-use App\Discount;
+use App\Http\Controllers\Controller;
+use App\Message;
 use Illuminate\Http\Request;
 
-class DiscountController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class DiscountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Discount  $discount
+     * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Discount $discount)
+    public function show(Message $message)
     {
         //
     }
@@ -52,10 +53,10 @@ class DiscountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Discount  $discount
+     * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function edit(Discount $discount)
+    public function edit(Message $message)
     {
         //
     }
@@ -64,10 +65,10 @@ class DiscountController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Discount  $discount
+     * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Discount $discount)
+    public function update(Request $request, Message $message)
     {
         //
     }
@@ -75,10 +76,10 @@ class DiscountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Discount  $discount
+     * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Discount $discount)
+    public function destroy(Message $message)
     {
         //
     }

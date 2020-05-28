@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Article;
 
-use App\FeatureGroup;
+use App\Article;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FeatureGroupController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class FeatureGroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\FeatureGroup  $featureGroup
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(FeatureGroup $featureGroup)
+    public function show(Article $article)
     {
         //
     }
@@ -52,10 +53,10 @@ class FeatureGroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\FeatureGroup  $featureGroup
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(FeatureGroup $featureGroup)
+    public function edit(Article $article)
     {
         //
     }
@@ -64,10 +65,10 @@ class FeatureGroupController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FeatureGroup  $featureGroup
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FeatureGroup $featureGroup)
+    public function update(Request $request, Article $article)
     {
         //
     }
@@ -75,10 +76,10 @@ class FeatureGroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\FeatureGroup  $featureGroup
+     * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FeatureGroup $featureGroup)
+    public function destroy(Article $article)
     {
         //
     }

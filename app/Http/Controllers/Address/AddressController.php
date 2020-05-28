@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Address;
 
-use App\City;
+use App\Address;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class AddressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\City  $city
+     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function show(City $city)
+    public function show(Address $address)
     {
         //
     }
@@ -52,10 +53,10 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\City  $city
+     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function edit(City $city)
+    public function edit(Address $address)
     {
         //
     }
@@ -64,10 +65,10 @@ class CityController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\City  $city
+     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, Address $address)
     {
         //
     }
@@ -75,10 +76,10 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\City  $city
+     * @param  \App\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy(Address $address)
     {
         //
     }

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Role;
 
-use App\Article;
+use App\Http\Controllers\Controller;
+use App\Role;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show(Role $role)
     {
         //
     }
@@ -52,10 +53,10 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Article  $article
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(Role $role)
     {
         //
     }
@@ -64,10 +65,10 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Article  $article
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -75,10 +76,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Article  $article
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Role $role)
     {
         //
     }
