@@ -20,7 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedInteger('price')->default(0);
+            $table->unsignedInteger('stock')->default(0);
             $table->decimal('avg_rate', 2, 1)->default(5.0);
+            $table->boolean('on_sale')->default(true);
             $table->string('slug');
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
