@@ -10,4 +10,14 @@ class Attribute extends Model
     {
         return $this->belongsTo(AttributeGroup::class);
     }
+
+    public function getAttributeGroupId()
+    {
+        return $this->attributes['attribute_group_id'];
+    }
+
+    public function getValue()
+    {
+        return $this->attributes['value'];
+    }
 }

@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->boolean('type')->default(Category::PRODUCT_CATEGORY);
             $table->timestamps();
 

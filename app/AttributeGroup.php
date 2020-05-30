@@ -10,4 +10,14 @@ class AttributeGroup extends Model
     {
         return $this->hasMany(Attribute::class);
     }
+
+    public function getName()
+    {
+        return $this->attributes['name'];
+    }
+
+    public function getPosition()
+    {
+        return $this->attributes['position'];
+    }
 }

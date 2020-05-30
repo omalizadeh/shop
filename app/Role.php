@@ -10,4 +10,9 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function getName()
+    {
+        return $this->attributes['name'];
+    }
 }

@@ -15,4 +15,24 @@ class Review extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getUserId()
+    {
+        return $this->attributes['user_id'];
+    }
+
+    public function getProductId()
+    {
+        return $this->attributes['product_id'];
+    }
+
+    public function getReview()
+    {
+        return $this->attributes['review'];
+    }
+
+    public function getRate()
+    {
+        return $this->attributes['rate'];
+    }
 }

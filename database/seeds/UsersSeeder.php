@@ -33,5 +33,16 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('123456'),
             'gender' => User::UNSPECIFIED_GENDER
         ]);
+
+        User::create([
+            'first_name' => 'مریم',
+            'last_name' => 'مهرابی',
+            'national_id' => '0022835442',
+            'tel' => '02566611331',
+            'mobile' => '09132235252',
+            'birth_date' => '1996-07-01',
+            'password' => bcrypt('123456'),
+            'gender' => User::FEMALE_GENDER
+        ]);
     }
 }

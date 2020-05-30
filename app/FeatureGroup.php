@@ -10,4 +10,14 @@ class FeatureGroup extends Model
     {
         return $this->hasMany(Feature::class);
     }
+
+    public function getName()
+    {
+        return $this->attributes['name'];
+    }
+
+    public function getPosition()
+    {
+        return $this->attributes['position'];
+    }
 }

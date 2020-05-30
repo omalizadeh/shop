@@ -20,4 +20,24 @@ class Address extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getUserId()
+    {
+        return $this->attributes['user_id'];
+    }
+
+    public function getProvinceId()
+    {
+        return $this->attributes['province_id'];
+    }
+
+    public function getCityId()
+    {
+        return $this->attributes['city_id'];
+    }
+
+    public function getAddress()
+    {
+        return $this->attributes['address'];
+    }
 }

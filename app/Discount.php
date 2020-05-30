@@ -13,4 +13,19 @@ class Discount extends Model
     {
         return $this->belongsTo(Discount::class);
     }
+
+    public function getProductId()
+    {
+        return $this->attributes['product_id'];
+    }
+
+    public function getAmount()
+    {
+        return $this->attributes['amount'];
+    }
+
+    public function isPercentage()
+    {
+        return $this->attributes['type'] === self::PERCENT_DISCOUNT;
+    }
 }

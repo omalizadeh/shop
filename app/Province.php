@@ -15,4 +15,9 @@ class Province extends Model
     {
         return $this->hasMany(Address::class);
     }
+
+    public function getName()
+    {
+        return $this->attributes['name'];
+    }
 }

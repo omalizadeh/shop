@@ -17,6 +17,8 @@ class CreateArticlesTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->string('slug')->unique();
+            $table->unsignedInteger('views')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

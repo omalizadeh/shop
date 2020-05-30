@@ -18,8 +18,8 @@ class CreateAttributeImpactTable extends Migration
             $table->id();
             $table->unsignedBigInteger('attribute_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedTinyInteger('type')->default(AttributeImpact::NO_CHANGE);
-            $table->unsignedInteger('price')->default(0);
+            $table->unsignedTinyInteger('impact_type')->default(AttributeImpact::CONSTANT);
+            $table->unsignedInteger('amount')->default(0);
             $table->timestamps();
 
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');

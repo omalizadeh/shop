@@ -11,6 +11,10 @@ class Category extends Model
 
     protected $table = 'categories';
 
+    protected $casts = [
+        'type' => 'boolean'
+    ];
+
     public function parentCategory()
     {
         return $this->belongsTo(Category::class);
@@ -19,5 +23,20 @@ class Category extends Model
     public function childCategories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function getParentId()
+    {
+        return $this->attributes['parent_id'];
+    }
+
+    public function getName()
+    {
+        return $this->attributes['name'];
+    }
+
+    public function getSlug()
+    {
+        return $this->attributes['slug'];
     }
 }

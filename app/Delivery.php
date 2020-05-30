@@ -10,4 +10,14 @@ class Delivery extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function getName()
+    {
+        return $this->attributes['name'];
+    }
+
+    public function getPrice()
+    {
+        return $this->attributes['price'];
+    }
 }

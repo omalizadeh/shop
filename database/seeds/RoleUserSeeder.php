@@ -10,7 +10,9 @@ class RoleUserSeeder extends Seeder
     {
         $admin = User::find(1);
         $admin->roles()->attach(1);
-        $customer = User::find(2);
-        $customer->roles()->attach(2);
+        $operator = User::find(2);
+        $operator->roles()->attach(2);
+        $customer = User::find(3);
+        $customer->roles()->attach(3);
     }
 }

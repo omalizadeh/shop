@@ -23,7 +23,8 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('stock')->default(0);
             $table->decimal('avg_rate', 2, 1)->default(5.0);
             $table->boolean('on_sale')->default(true);
-            $table->string('slug');
+            $table->string('slug')->unique();
+            $table->unsignedInteger('views')->default(0);
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->boolean('is_active')->default(true);

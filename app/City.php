@@ -15,4 +15,14 @@ class City extends Model
     {
         return $this->hasMany(Address::class);
     }
+
+    public function getProvinceId()
+    {
+        return $this->attributes['province_id'];
+    }
+
+    public function getName()
+    {
+        return $this->attributes['name'];
+    }
 }
