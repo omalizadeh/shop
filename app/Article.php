@@ -35,6 +35,16 @@ class Article extends Model
         return $this->attributes['views'];
     }
 
+    public function getMetaTitle()
+    {
+        return $this->attributes['meta_title'];
+    }
+
+    public function getMetaDescription()
+    {
+        return $this->attributes['meta_description'];
+    }
+
     public function isActive()
     {
         return $this->attributes['is_active'] === true;

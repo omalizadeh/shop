@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
@@ -19,14 +14,16 @@ class CreateProductsTable extends Migration
             $table->string('barcode')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->string('slug')->unique();
             $table->unsignedInteger('price')->default(0);
+            $table->unsignedDecimal('weight', 3, 3)->default(0.123);
             $table->unsignedInteger('stock')->default(0);
             $table->decimal('avg_rate', 2, 1)->default(5.0);
-            $table->boolean('on_sale')->default(true);
-            $table->string('slug')->unique();
             $table->unsignedInteger('views')->default(0);
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
+            $table->unsignedInteger('total_sold')->default(0);
+            $table->boolean('on_sale')->default(true);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
@@ -34,11 +31,6 @@ class CreateProductsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('products');

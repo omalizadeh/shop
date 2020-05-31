@@ -18,6 +18,8 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('slug')->unique();
+            $table->string('meta_title')->nullable();
+            $table->string('meta_description')->nullable();
             $table->unsignedInteger('views')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

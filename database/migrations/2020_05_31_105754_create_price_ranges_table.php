@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAttributeProductCombinationTable extends Migration
+class CreatePriceRangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateAttributeProductCombinationTable extends Migration
      */
     public function up()
     {
-        Schema::create('attribute_product_combination', function (Blueprint $table) {
+        Schema::create('price_ranges', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('carrier_id');
+            $table->unsignedInteger('delimiter1');
+            $table->unsignedInteger('delimiter2');
             $table->timestamps();
+
+            $table->foreign('carrier_id')->references('id')->on('carriers')->onDelete('cascade');
         });
     }
 
@@ -26,6 +31,6 @@ class CreateAttributeProductCombinationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attribute_product_combination');
+        Schema::dropIfExists('price_ranges');
     }
 }

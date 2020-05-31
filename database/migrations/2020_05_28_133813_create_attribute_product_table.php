@@ -17,6 +17,7 @@ class CreateAttributeProductTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedInteger('stock')->default(0);
+            $table->unsignedInteger('price');
             $table->boolean('is_default')->default(false);
             $table->timestamps();
 

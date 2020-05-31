@@ -15,9 +15,15 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->unsignedBigInteger('carrier_id');
+            $table->unsignedBigInteger('weight_range_id');
+            $table->unsignedBigInteger('price_range_id');
             $table->unsignedInteger('price');
             $table->timestamps();
+
+            $table->foreign('carrier_id')->references('id')->on('carriers')->onDelete('cascade');
+            $table->foreign('weight_range_id')->references('id')->on('weight_ranges')->onDelete('cascade');
+            $table->foreign('price_range_id')->references('id')->on('price_ranges')->onDelete('cascade');
         });
     }
 

@@ -50,6 +50,11 @@ class Product extends Model
         return $this->attributes['price'];
     }
 
+    public function getWeight()
+    {
+        return $this->attributes['weight'];
+    }
+
     public function getStock()
     {
         return $this->attributes['stock'];
@@ -78,6 +83,11 @@ class Product extends Model
     public function getMetaDescription()
     {
         return $this->attributes['meta_description'];
+    }
+
+    public function getTotalSold()
+    {
+        return $this->attributes['total_sold'];
     }
 
     public function isOnSale()
