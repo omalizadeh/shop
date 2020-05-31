@@ -1,0 +1,195 @@
+@import "rtl/bootstrap";
+
+// Shards variables overrides.
+@import "overrides";
+
+// Base Shards UI Kit
+@import "../../node_modules/shards-ui/scss/shards";
+
+/* Shards Dashboards Lite Styles */
+
+// Core
+@import "variables";
+
+@import "../node_modules/font-vazir/stylesheet.css";
+
+$main-sidebar-nav-link-active-box-shadow: inset -0.1875rem 0 0 $accent-color !default;
+
+.mr-auto, .my-auto {
+  margin-left: inherit!important;
+}
+.ml-auto, .mx-auto {
+  margin-right: auto!important;
+  margin-left: 0!important;
+}
+
+body{
+  direction: rtl;
+  font-family: "Vazir FD";
+  font-size: .9rem;
+  background-color: #f5f6f8;
+}
+.btn-outline-accent {
+  border-color: #007bff;
+  color: #007bff;
+}
+.navbar-brand, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .nav, .badge, .ql-toolbar.ql-snow, .ql-container, .stats-small__value, .main-sidebar .nav .nav-item, .main-sidebar .nav .nav-link, .datepicker-plot-area, .btn {
+  font-family: "Vazir FD"!important;
+}
+
+.main-sidebar {
+  position: fixed;
+
+  .nav .nav-item .nav-link.active, .nav .nav-item .nav-link:hover, .nav .nav-item.active, .nav .nav-item:hover{
+    box-shadow: $main-sidebar-nav-link-active-box-shadow;
+  }
+  .toggle-sidebar{
+    right: auto;
+    left: 0;
+    border-left: none;
+    border-right: 1px solid #e1e5eb;
+  }
+}
+.custom-select{
+  padding: .375rem .75rem .375rem 1.75rem;
+  background-position: 9%;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after{
+  right: 6px;
+}
+.custom-radio .custom-control-label::after{
+  right: 5px;
+}
+.custom-toggle.custom-toggle-sm {
+  padding-right: 2.625rem;
+  padding-left: 0;
+}
+.custom-toggle.custom-toggle-sm{
+  .custom-control-label::after {
+    right: 0.1875rem;
+    left: auto;
+  }
+  .custom-control-input:checked ~ .custom-control-label::after {
+    right: 0.495rem;
+  }
+}
+
+.main-navbar .navbar .navbar-nav .dropdown-menu{
+  left: 0;
+  right: auto;
+}
+.input-group.input-group-seamless>.form-control:not(:first-child), .input-group.input-group-seamless>.custom-select:not(:first-child) {
+  padding-right: 40px;
+  padding-left: 0;
+}
+.input-group.input-group-seamless>.input-group-prepend {
+  left: auto;
+  right: 0;
+}
+.color-switcher-toggle{
+  right: 26px;
+  left: auto;
+}
+.color-switcher{
+  right: 0;
+  left: auto;
+  transform: translateX(110%);
+
+  &.visible{
+    right:24px;
+    left:auto;
+  }
+}
+.promo-popup {
+  right: auto;
+  left: 24px;
+
+  &.hidden{
+    right: auto;
+    left: 24px;
+
+    img{
+      transform: translateX(100%);
+    }
+    .pp-intro-bar{
+      padding-right: 20px;
+      padding-left: 0;
+      letter-spacing: 0;
+    }
+  }
+  img{
+    right:0;
+    left: auto;
+  }
+  .pp-intro-bar{
+    padding-right: 160px;
+    padding-left: 0;
+
+    .close, .up{
+      left:0;
+      right:auto;
+    }
+  }
+  .pp-inner-content{
+    padding-right: 172px;
+    padding-left: 0!important;
+  }
+}
+
+.card-post--aside {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row;
+  flex-flow: row;
+
+  .card-post__author {
+    right: .9375rem;
+    left: auto;
+  }
+  .card-post__category {
+    left: initial!important;
+    right: .9375rem!important;
+  }
+  .card-post__image {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: .625rem;
+    border-bottom-right-radius: .625rem;
+  }
+}
+
+.card-post--1 {
+  .card-body {
+    padding-top: 2.1875rem;
+  }
+  .card-post__author{
+    margin-right: 1.5625rem;
+    margin-left: auto;
+  }
+  .card-post__category{
+    left: .9375rem;
+    right: auto;
+  }
+}
+
+.ql-editor-ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+.ql-editor-rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.ql-editor.ql-blank::before{
+  left: auto;
+}
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg{
+  left: 0;
+  right: auto;
+}
+.progress-wrapper .progress-value {
+  left: 0;
+  right: auto;
+}

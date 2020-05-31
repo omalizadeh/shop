@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Home\IndexController@index');
 
+//// TODO: MUST CHANGE ROUTE TO RANDOM TEXT -----
+//
+Route::get('/admins', 'Admin\Home\IndexController@index');
+
 Route::resource('users', 'User\UserController');
 Route::resource('addresses', 'Address\AddressController');
 Route::resource('articles', 'Article\ArticleController');
