@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+    use FarsiTimestamps;
+
     public function user()
     {
         return $this->belongsTo(User::class);

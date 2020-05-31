@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    use FarsiTimestamps;
+
     protected $casts = [
         'on_sale' => 'boolean'
     ];

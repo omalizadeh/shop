@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, FarsiTimestamps;
 
     const UNSPECIFIED_GENDER = 1;
     const MALE_GENDER = 2;

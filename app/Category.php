@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use FarsiTimestamps;
+
     const PRODUCT_CATEGORY = true;
     const ARTICLE_CATEGORY = false;
 

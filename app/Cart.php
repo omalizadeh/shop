@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
+    use FarsiTimestamps;
+
     protected $casts = [
         'is_ordered' => 'boolean'
     ];

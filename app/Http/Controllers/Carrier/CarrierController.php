@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Carrier;
 
-use App\WeightRange;
+use App\Carrier;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class WeightRangeController extends Controller
+class CarrierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class WeightRangeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\WeightRange  $weightRange
+     * @param  \App\Carrier  $carrier
      * @return \Illuminate\Http\Response
      */
-    public function show(WeightRange $weightRange)
+    public function show(Carrier $carrier)
     {
         //
     }
@@ -52,10 +53,10 @@ class WeightRangeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\WeightRange  $weightRange
+     * @param  \App\Carrier  $carrier
      * @return \Illuminate\Http\Response
      */
-    public function edit(WeightRange $weightRange)
+    public function edit(Carrier $carrier)
     {
         //
     }
@@ -64,10 +65,10 @@ class WeightRangeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\WeightRange  $weightRange
+     * @param  \App\Carrier  $carrier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WeightRange $weightRange)
+    public function update(Request $request, Carrier $carrier)
     {
         //
     }
@@ -75,10 +76,10 @@ class WeightRangeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\WeightRange  $weightRange
+     * @param  \App\Carrier  $carrier
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WeightRange $weightRange)
+    public function destroy(Carrier $carrier)
     {
         //
     }

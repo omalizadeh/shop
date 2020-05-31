@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Address extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, FarsiTimestamps;
 
     public function province()
     {

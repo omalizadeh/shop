@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Coupon extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, FarsiTimestamps;
 
     const AMOUNT_DISCOUNT = 1;
     const PERCENT_DISCOUNT = 2;

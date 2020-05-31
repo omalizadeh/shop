@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PriceRange;
 
-use App\Carrier;
+use App\Http\Controllers\Controller;
+use App\PriceRange;
 use Illuminate\Http\Request;
 
-class CarrierController extends Controller
+class PriceRangeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class CarrierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Carrier  $carrier
+     * @param  \App\PriceRange  $priceRange
      * @return \Illuminate\Http\Response
      */
-    public function show(Carrier $carrier)
+    public function show(PriceRange $priceRange)
     {
         //
     }
@@ -52,10 +53,10 @@ class CarrierController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Carrier  $carrier
+     * @param  \App\PriceRange  $priceRange
      * @return \Illuminate\Http\Response
      */
-    public function edit(Carrier $carrier)
+    public function edit(PriceRange $priceRange)
     {
         //
     }
@@ -64,10 +65,10 @@ class CarrierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Carrier  $carrier
+     * @param  \App\PriceRange  $priceRange
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Carrier $carrier)
+    public function update(Request $request, PriceRange $priceRange)
     {
         //
     }
@@ -75,10 +76,10 @@ class CarrierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Carrier  $carrier
+     * @param  \App\PriceRange  $priceRange
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Carrier $carrier)
+    public function destroy(PriceRange $priceRange)
     {
         //
     }

@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Traits\FarsiTimestamps;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    use FarsiTimestamps;
+
     const PENDING_PAYMENT = 1;
     const PACKING = 2;
     const SENT = 3;

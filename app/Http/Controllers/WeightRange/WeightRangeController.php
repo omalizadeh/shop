@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\WeightRange;
 
-use App\PriceRange;
+use App\Http\Controllers\Controller;
+use App\WeightRange;
 use Illuminate\Http\Request;
 
-class PriceRangeController extends Controller
+class WeightRangeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class PriceRangeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\PriceRange  $priceRange
+     * @param  \App\WeightRange  $weightRange
      * @return \Illuminate\Http\Response
      */
-    public function show(PriceRange $priceRange)
+    public function show(WeightRange $weightRange)
     {
         //
     }
@@ -52,10 +53,10 @@ class PriceRangeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PriceRange  $priceRange
+     * @param  \App\WeightRange  $weightRange
      * @return \Illuminate\Http\Response
      */
-    public function edit(PriceRange $priceRange)
+    public function edit(WeightRange $weightRange)
     {
         //
     }
@@ -64,10 +65,10 @@ class PriceRangeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PriceRange  $priceRange
+     * @param  \App\WeightRange  $weightRange
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PriceRange $priceRange)
+    public function update(Request $request, WeightRange $weightRange)
     {
         //
     }
@@ -75,10 +76,10 @@ class PriceRangeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PriceRange  $priceRange
+     * @param  \App\WeightRange  $weightRange
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PriceRange $priceRange)
+    public function destroy(WeightRange $weightRange)
     {
         //
     }
