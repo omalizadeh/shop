@@ -28,7 +28,9 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Repositories\Interfaces\ArticleRepositoryInterface::class, \App\Repositories\ArticleRepository::class);
         $this->app->singleton(\App\Repositories\Interfaces\BrandRepositoryInterface::class, \App\Repositories\BrandRepository::class);
         $this->app->singleton(\App\Repositories\Interfaces\CategoryRepositoryInterface::class, \App\Repositories\CategoryRepository::class);
-        $this->app->singleton(\App\Repositories\Interfaces\ProductRepositoryInterface::class, \App\Repositories\ArticleRepository::class);
+        $this->app->singleton(\App\Repositories\Interfaces\ProductRepositoryInterface::class, \App\Repositories\ProductRepository::class);
+        $this->app->singleton(\App\Repositories\Interfaces\FeatureGroupRepositoryInterface::class, \App\Repositories\FeatureGroupRepository::class);
+        $this->app->singleton(\App\Repositories\Interfaces\FeatureRepositoryInterface::class, \App\Repositories\FeatureRepository::class);
         // extended classes
     }
 }

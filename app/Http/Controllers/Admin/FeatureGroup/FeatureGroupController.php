@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Admin\FeatureGroup;
 
 use App\FeatureGroup;
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\FeatureGroupRepositoryInterface;
 use Illuminate\Http\Request;
 
 class FeatureGroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $featureGroupRepository;
+
+    public function __construct(FeatureGroupRepositoryInterface $featureGroupRepository)
+    {
+        $this->featureGroupRepository = $featureGroupRepository;
+    }
+
     public function index()
     {
         //
