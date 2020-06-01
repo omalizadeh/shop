@@ -28,25 +28,25 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('articles.index') }}">
+                <a class="nav-link " href="{{ route('admins.articles.index') }}">
                     <i class="material-icons">edit</i>
                     <span>وبلاگ و مقالات</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('products.index') }}">
+                <a class="nav-link " href="{{ route('admins.products.index') }}">
                     <i class="material-icons">vertical_split</i>
                     <span>محصولات</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('categories.index') }}">
+                <a class="nav-link " href="{{ route('admins.categories.index') }}">
                     <i class="material-icons">note_add</i>
                     <span>دسته بندی</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('brands.index') }}">
+                <a class="nav-link " href="{{ route('admins.brands.index') }}">
                     <i class="material-icons">view_module</i>
                     <span>برند</span>
                 </a>
@@ -58,7 +58,7 @@
             </a>
             </li> --}}
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('orders.index') }}">
+                <a class="nav-link " href="{{ route('admins.orders.index') }}">
                     <i class="material-icons">table_chart</i>
                     <span>سفارشات</span>
                 </a>
@@ -76,7 +76,7 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('messages.index') }}">
+                <a class="nav-link active" href="{{ route('admins.messages.index') }}">
                     <i class="material-icons">error</i>
                     <span>پیام ها</span>
                 </a>

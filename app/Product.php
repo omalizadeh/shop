@@ -9,6 +9,8 @@ class Product extends Model
 {
     use FarsiTimestamps;
 
+    const PRODUCTS_TABLE = 'products';
+
     protected $casts = [
         'on_sale' => 'boolean'
     ];

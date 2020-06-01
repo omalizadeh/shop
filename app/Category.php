@@ -9,6 +9,7 @@ class Category extends Model
 {
     use FarsiTimestamps;
 
+    const CATEGORIES_TABLE = 'categories';
     const PRODUCT_CATEGORY = true;
     const ARTICLE_CATEGORY = false;
 

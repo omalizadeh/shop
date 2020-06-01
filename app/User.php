@@ -55,4 +55,57 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class);
     }
+
+    public function getNationalId()
+    {
+        return $this->attributes['national_id'];
+    }
+
+    public function getFirstName()
+    {
+        return $this->attributes['first_name'];
+    }
+
+    public function getLastName()
+    {
+        return $this->attributes['last_name'];
+    }
+
+    public function getTel()
+    {
+        return $this->attributes['tel'];
+    }
+
+    public function getMobile()
+    {
+        return $this->attributes['mobile'];
+    }
+
+    public function getBirthDate()
+    {
+        return $this->attributes['birth_date'];
+    }
+
+    public function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function hasAnyRoles(array $roles)
+    {
+        if ($this->roles()->whereIn('name', $roles)->first()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getFullName()
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }

@@ -9,6 +9,8 @@ class Brand extends Model
 {
     use FarsiTimestamps;
 
+    const BRANDS_TABLE = 'brands';
+
     public function products()
     {
         return $this->hasMany(Product::class);

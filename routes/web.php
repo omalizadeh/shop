@@ -17,31 +17,35 @@ Auth::routes();
 
 Route::get('/', 'Front\Home\IndexController@index')->name('index');
 
-//// TODO: MUST CHANGE ROUTE TO RANDOM TEXT -----
+//// TODO: MUST CHANGE ROUTE TO RANDOM STRING -----
 //
-Route::get('/admins', 'Admin\Home\IndexController@index')->name('admins.index');
+Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function () {
+    Route::get('', 'Admin\Home\IndexController@index')->name('index');
+    Route::resource('articles', 'Admin\Article\ArticleController');
+    Route::resource('products', 'Admin\Product\ProductController');
+    Route::resource('brands', 'Admin\Brand\BrandController');
+    Route::resource('discounts', 'Admin\Discount\DiscountController');
+    Route::resource('features', 'Admin\Feature\FeatureController');
+    Route::resource('feature-groups', 'Admin\FeatureGroup\FeatureGroupController');
+    Route::resource('roles', 'Admin\Role\RoleController');
+    Route::resource('tags', 'Admin\Tag\TagController');
+    Route::resource('transactions', 'Admin\Transaction\TransactionController');
+    Route::resource('addresses', 'Admin\Address\AddressController');
+    Route::resource('users', 'Admin\User\UserController');
+    Route::resource('messages', 'Admin\Message\MessageController');
+    Route::resource('orders', 'Admin\Order\OrderController');
+    Route::resource('categories', 'Admin\Category\CategoryController');
+});
 
-Route::resource('users', 'User\UserController');
-Route::resource('addresses', 'Address\AddressController');
-Route::resource('articles', 'Article\ArticleController');
-Route::resource('brands', 'Brand\BrandController');
-Route::resource('carts', 'Cart\CartController');
-Route::resource('categories', 'Category\CategoryController');
-Route::resource('cities', 'City\CityController');
-Route::resource('coupons', 'Coupon\CouponController');
-Route::resource('deliveries', 'Delivery\DeliveryController');
-Route::resource('discounts', 'Discount\DiscountController');
-Route::resource('features', 'Feature\FeatureController');
-Route::resource('feature-groups', 'FeatureGroup\FeatureGroupController');
-Route::resource('messages', 'Message\MessageController');
-Route::resource('orders', 'Order\OrderController');
-Route::resource('products', 'Product\ProductController');
-Route::resource('provinces', 'Province\ProvinceController');
-Route::resource('reviews', 'Review\ReviewController');
-Route::resource('roles', 'Role\RoleController');
-Route::resource('tags', 'Tag\TagController');
-Route::resource('transactions', 'Transaction\TransactionController');
+
+Route::resource('brands', 'Front\Brand\BrandController');
+Route::resource('articles', 'Front\Article\ArticleController');
+Route::resource('carts', 'Front\Cart\CartController');
+Route::resource('cities', 'Front\City\CityController');
+Route::resource('coupons', 'Front\Coupon\CouponController');
+Route::resource('deliveries', 'Front\Delivery\DeliveryController');
+Route::resource('products', 'Front\Product\ProductController');
+Route::resource('provinces', 'Front\Province\ProvinceController');
+Route::resource('reviews', 'Front\Review\ReviewController');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

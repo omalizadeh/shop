@@ -44,9 +44,7 @@
 <body class="h-100">
     <div class="container-fluid">
         <div class="row">
-            {{-- @if(auth()->check()) --}}
             @include('admins.layouts.sidebar')
-            {{-- @endif --}}
 
             <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
                 @include('admins.layouts.navbar')
@@ -59,7 +57,6 @@
         </div>
     </div>
     <div class="promo-popup animated">
-        <img src="https://dgc2qnsehk7ta.cloudfront.net/uploads/sd-blog-promo-2.jpg">
         <div class="pp-intro-bar"> نیاز به پشتیبانی دارید ؟
             <span class="close">
                 <i class="material-icons">close</i>
@@ -69,6 +66,7 @@
             </span>
         </div>
         <div class="pp-inner-content">
+            {{-- <img src="{{asset('panel-assets/images/sup.png')}}"> --}}
             <h2>پشتیبانی</h2>
             <p>کارشناسان جهان آنلاین آماده اراعه خدمات و پشتیبانی میباشند</p>
             <span class="pp-cta extra-action text-justify">02532857853</span>

@@ -27,22 +27,21 @@
                     <div class="input-group form-group">
                         <div class="input-group-prepend"><span class="input-group-text"><i
                                     class="fe-icon-mail"></i></span></div>
-                        <input id="email" type="email"
-                            class="form-control text-left placeholder-right @error('email') is-invalid @enderror"
-                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input id="mobile" type="text"
+                            class="form-control text-left placeholder-right @error('mobile') is-invalid @enderror"
+                            name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus>
 
-                        @error('email')
+                        @error('mobile')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                        <div class="invalid-feedback">لطفا آدرس ایمیل خود را وارد نمایید!</div>
+                        <div class="invalid-feedback">لطفا شماره موبایل خود را وارد نمایید!</div>
                     </div>
                     <div class="input-group form-group">
                         <div class="input-group-prepend"><span class="input-group-text"><i
                                     class="fe-icon-lock"></i></span></div>
-                        <input id="password" type="password" class="form-control" name="password" required
-                            autocomplete="current-password">
+                        <input id="password" dir="ltr" type="password" class="form-control" name="password" required>
                         <div class="invalid-feedback">لطفا رمز عبور معتبر را وارد کنید</div>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between">

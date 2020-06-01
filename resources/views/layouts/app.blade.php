@@ -64,12 +64,14 @@
                         <a class="btn btn-primary btn-sm btn-block" href="{{ route("login") }}"><i
                                 class="fe-icon-user"></i>&nbsp;ورود</a>
                         @else
-                        <a class="btn btn-primary btn-sm" href="{{ route('home') }}"><i
-                                class="fe-icon-user"></i>&nbsp;ناحیه کاربری</a>
-                        <a class="btn btn-warning btn-sm" href="{{ route('LogoutPage') }}"><i
-                                class="fe-icon-user"></i>&nbsp;خروج</a>
-
+                        <a class="btn btn-primary btn-sm" href="#"><i class="fe-icon-user"></i>&nbsp;ناحیه کاربری</a>
+                        <a class="btn btn-warning btn-sm"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            href="#logout"><i class="fe-icon-user"></i>&nbsp;خروج</a>
                         @endif
+                        <form action="{{route('logout')}}" id="logout-form" method="post" style="display:none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
@@ -148,11 +150,16 @@
                                         class="fe-icon-user"></i>{{ "ناحیه کاربری" }}</a>
                                 <div class="dropdown-menu left-aligned p-3 text-center" style="min-width: 200px;">
                                     <p class="text-sm opacity-70">
-                                        {{ auth()->user()->name.' '.auth()->user()->last_name }}
+                                        {{ auth()->user()->getFullName() }}
 
                                     </p>
                                     <a class="btn btn-warning btn-sm btn-block"
-                                        href="{{ route('LogoutPage') }}">خروج</a>
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                        href="#logout">خروج</a>
+                                    <form action="{{route('logout')}}" id="logout-form" method="post"
+                                        style="display:none;">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                             @endif
@@ -283,7 +290,7 @@
     </span>
     <div class="site-backdrop"></div>
     <script type="text/javascript">
-    function alert(text) {
+        function alert(text) {
         iziToast.success({
             title: "توجه !",
             timeout: 30000,
