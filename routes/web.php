@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'Home\IndexController@index');
+Auth::routes();
+
+Route::get('/', 'Front\Home\IndexController@index')->name('index');
 
 //// TODO: MUST CHANGE ROUTE TO RANDOM TEXT -----
 //
-Route::get('/admins', 'Admin\Home\IndexController@index');
+Route::get('/admins', 'Admin\Home\IndexController@index')->name('admins.index');
 
 Route::resource('users', 'User\UserController');
 Route::resource('addresses', 'Address\AddressController');
@@ -39,3 +41,7 @@ Route::resource('reviews', 'Review\ReviewController');
 Route::resource('roles', 'Role\RoleController');
 Route::resource('tags', 'Tag\TagController');
 Route::resource('transactions', 'Transaction\TransactionController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

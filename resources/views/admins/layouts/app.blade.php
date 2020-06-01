@@ -15,14 +15,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('asset/styles/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('panel-assets/styles/bootstrap.min.css') }}">
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0"
-        href="{{ asset('asset/styles/shards-dashboards.1.1.0.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('asset/styles/extras.1.1.0.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('asset/styles/rtl.css') }}">
-    <script async defer src="{{ asset('asset/scripts/buttons.js') }}"></script>
-    <script async defer src="{{ asset('asset/node_modules/datepicker/persian-datepicker.min.css') }}"></script>
-    <link rel="stylesheet" href="{{ asset('asset/styles/rtl.css') }}">
+        href="{{ asset('panel-assets/styles/shards-dashboards.1.1.0.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('panel-assets/styles/extras.1.1.0.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('panel-assets/styles/rtl.css') }}">
+    <script async defer src="{{ asset('panel-assets/scripts/buttons.js') }}"></script>
+    <script async defer src="{{ asset('panel-assets/node_modules/datepicker/persian-datepicker.min.css') }}"></script>
+    <link rel="stylesheet" href="{{ asset('panel-assets/styles/rtl.css') }}">
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
     <style>
@@ -75,17 +75,17 @@
         </div>
     </div>
 
-    <script src="{{ asset('asset/jquery.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/popper.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/Chart.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/shards.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/jquery.sharrre.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/extras.1.1.0.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/shards-dashboards.1.1.0.min.js') }}"></script>
-    <script src="{{ asset('asset/node_modules/datepicker/persian-date.min.js') }}"></script>
-    <script src="{{ asset('asset/node_modules/datepicker/persian-datepicker.min.js') }}"></script>
-    <script src="{{ asset('asset/scripts/app/app-blog-overview.1.1.0.js') }}"></script>
+    <script src="{{ asset('panel-assets/jquery.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/popper.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/Chart.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/shards.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/jquery.sharrre.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/extras.1.1.0.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/shards-dashboards.1.1.0.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/node_modules/datepicker/persian-date.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/node_modules/datepicker/persian-datepicker.min.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/app/app-blog-overview.1.1.0.js') }}"></script>
     @yield('script')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"></script>
