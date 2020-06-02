@@ -23,7 +23,7 @@
     <script async defer src="{{ asset('panel-assets/scripts/buttons.js') }}"></script>
     <script async defer src="{{ asset('panel-assets/node_modules/datepicker/persian-datepicker.min.css') }}"></script>
     <link rel="stylesheet" href="{{ asset('panel-assets/styles/rtl.css') }}">
-    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script> --}}
 
     <style>
         .iziToast-buttons {
@@ -90,12 +90,21 @@
     @if($errors)
     <script>
         $(document).ready(function () {
-            @forelse($errors->all() as $error)
-                    iziToast.info({
+            @if(Session::has('success'))
+            iziToast.success({
+                        message: "{{ Session::get('success') }}"
+                    });
+                    @elseif(Session::has('fail'))
+                    iziToast.error({
+                        message: "{{ Session::get('fail') }}"
+                    });
+                    @else
+                    @foreach($errors->all() as $error)
+                    iziToast.error({
                         message: '{{ $error }}'
                     });
-                @empty
-            @endforelse
+                    @endforeach
+                    @endif
         });
     </script>
     @endif

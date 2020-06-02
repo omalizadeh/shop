@@ -11,6 +11,8 @@ class Brand extends Model
 
     const BRANDS_TABLE = 'brands';
 
+    protected $fillable = ['name', 'slug'];
+
     public function products()
     {
         return $this->hasMany(Product::class);

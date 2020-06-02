@@ -18,7 +18,8 @@ class FeatureGroupController extends Controller
 
     public function index()
     {
-        //
+        $featureGroups = $this->featureGroupRepository->all();
+        return view('admins.feature_groups.index', compact('featureGroups'));
     }
 
     /**

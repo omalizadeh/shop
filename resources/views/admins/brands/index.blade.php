@@ -1,6 +1,6 @@
 @extends('admins.layouts.app')
 @section('title')
-تولید کنندگان
+برندها
 @endsection
 @section('content')
 <div class="col-md-12">
@@ -8,7 +8,7 @@
         <div class="card-header border-bottom">
             <h6 class="m-0">برندها
                 <div class="float-right">
-                    <button type="button" class="btn btn-outline-success">افزودن برند</button>
+                    <a href="{{route('admins.brands.create')}}" class="btn btn-outline-success">افزودن برند</a>
                 </div>
             </h6>
         </div>
@@ -28,12 +28,23 @@
                     <td>{{ $brand->getName() }}</td>
                     <td>{{ $brand->getSlug() }}</td>
                     <td>
-                        <button type="button" title="ویرایش" class="btn btn-outline-info">
-                            ویرایش
-                        </button>
-                        <button type="button" title="حذف" class="btn btn-outline-danger">
+                        <div class="d-inline-flex">
+                            <div>
+                                <a href="{{route('admins.brands.edit',$brand->id)}}"
+                                    class="btn btn-outline-warning">ویرایش</a>
+                            </div>
+                            <div>
+                                <form action="{{route('admins.brands.destroy',$brand->id)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-danger mr-1" type="submit"
+                                        onclick="return confirm('آیا از حذف مطمئن هستید؟');">حذف</button>
+                                </form>
+                            </div>
+                        </div>
+                        {{-- <button type="button" title="حذف" class="btn btn-outline-danger">
                             حذف
-                        </button>
+                        </button> --}}
                     </td>
                 </tr>
                 @empty

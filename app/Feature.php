@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feature extends Model
 {
+    const FEATURES_TABLE = 'features';
+
     public function featureGroup()
     {
         return $this->belongsTo(FeatureGroup::class, 'feature_group_id');
@@ -24,5 +26,10 @@ class Feature extends Model
     public function getPosition()
     {
         return $this->attributes['position'];
+    }
+
+    public function getFeatureGroupName()
+    {
+        return $this->featureGroup->getName();
     }
 }

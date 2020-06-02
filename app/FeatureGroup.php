@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FeatureGroup extends Model
 {
+    const FEATURE_GROUPS_TABLE = 'feature_groups';
+
     public function features()
     {
         return $this->hasMany(Feature::class);

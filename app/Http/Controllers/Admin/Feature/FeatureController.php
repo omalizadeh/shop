@@ -4,18 +4,22 @@ namespace App\Http\Controllers\Admin\Feature;
 
 use App\Feature;
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\FeatureRepositoryInterface;
 use Illuminate\Http\Request;
 
 class FeatureController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $featureRepository;
+
+    public function __construct(FeatureRepositoryInterface $featureRepository)
+    {
+        $this->featureRepository = $featureRepository;
+    }
+
     public function index()
     {
-        //
+        $features = $this->featureRepository->all();
+        return view('admins.features.index', compact('features'));
     }
 
     /**

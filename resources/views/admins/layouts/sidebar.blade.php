@@ -40,6 +40,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link " href="{{ route('admins.feature-groups.index') }}">
+                    <i class="material-icons">vertical_split</i>
+                    <span>گروه ویژگی ها</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admins.features.index') }}">
+                    <i class="material-icons">vertical_split</i>
+                    <span>ویژگی ها</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.categories.index') }}">
                     <i class="material-icons">note_add</i>
                     <span>دسته بندی</span>
@@ -76,7 +88,7 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admins.messages.index') }}">
+                <a class="nav-link" href="{{ route('admins.messages.index') }}">
                     <i class="material-icons">error</i>
                     <span>پیام ها</span>
                 </a>

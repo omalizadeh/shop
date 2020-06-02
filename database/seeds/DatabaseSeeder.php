@@ -12,5 +12,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProvincesSeeder::class);
         $this->call(CitiesSeeder::class);
         $this->call(BrandsSeeder::class);
+        $this->call(FeatureGroupsSeeder::class);
+        $this->call(FeaturesSeeder::class);
     }
 }
