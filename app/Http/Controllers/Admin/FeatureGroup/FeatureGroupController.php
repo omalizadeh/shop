@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin\FeatureGroup;
 
 use App\FeatureGroup;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FeatureGroupRequest;
+use App\Http\Requests\FeatureGroupStoreRequest;
 use App\Repositories\Interfaces\FeatureGroupRepositoryInterface;
-use Illuminate\Http\Request;
 
 class FeatureGroupController extends Controller
 {
@@ -22,67 +23,37 @@ class FeatureGroupController extends Controller
         return view('admins.feature_groups.index', compact('featureGroups'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admins.feature_groups.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(FeatureGroupStoreRequest $request)
     {
-        //
+        $request->merge(['position' => $this->featureGroupRepository->nextPosition()]);
+        try {
+            $this->featureGroupRepository->create($request->only(['name', 'position']));
+            return redirect()->route('admins.feature-groups.index')->with('success', 'گروه ویژگی ایجاد شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\FeatureGroup  $featureGroup
-     * @return \Illuminate\Http\Response
-     */
     public function show(FeatureGroup $featureGroup)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\FeatureGroup  $featureGroup
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(FeatureGroup $featureGroup)
+    public function edit(FeatureGroup $feature_group)
     {
-        //
+        return view('admins.feature_groups.edit', ['group' => $feature_group]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FeatureGroup  $featureGroup
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, FeatureGroup $featureGroup)
+    public function update(FeatureGroupRequest $request, FeatureGroup $featureGroup)
     {
-        //
+        dd($request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\FeatureGroup  $featureGroup
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(FeatureGroup $featureGroup)
     {
         //

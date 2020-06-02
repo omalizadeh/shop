@@ -1,29 +1,25 @@
 @extends('admins.layouts.app')
 @section('title')
-برندها
+گروه ویژگی ها
 @endsection
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="card-header border-bottom">
-            <h6 class="m-0">افزودن برند
+            <h6 class="m-0">افزودن گروه ویژگی
             </h6>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item p-3">
                 <div class="row">
                     <div class="col">
-                        <form action="{{route('admins.brands.store')}}" method="post">
+                        <form action="{{route('admins.feature-groups.store')}}" method="post">
                             @csrf
                             <div class="form-row">
-                                <div class="form-group col-lg-6">
-                                    <label for="name">نام برند</label>
+                                <div class="form-group col-lg-12">
+                                    <label for="name">نام گروه</label>
                                     <input type="text" class="form-control" value="{{old('name')}}" name="name"
                                         required>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label for="slug">نامک (انگلیسی)</label>
-                                    <input type="text" class="form-control" value="{{old('slug')}}" name="slug">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">ایجاد</button>

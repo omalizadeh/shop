@@ -16,6 +16,7 @@ class CreateFeatureProductTable extends Migration
         Schema::create('feature_product', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('feature_id');
+            $table->string('value');
 
             $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

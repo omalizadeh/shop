@@ -8,7 +8,7 @@
         <div class="card-header border-bottom">
             <h6 class="m-0">گروه ویژگی ها
                 <div class="float-right">
-                    <button type="button" class="btn btn-outline-success">افزودن گروه</button>
+                    <a href="{{route('admins.feature-groups.create')}}" class="btn btn-outline-success">افزودن گروه</a>
                 </div>
             </h6>
         </div>
@@ -28,12 +28,20 @@
                     <td>{{ $group->getName() }}</td>
                     <td>{{ $group->getPosition() }}</td>
                     <td>
-                        <button type="button" title="ویرایش" class="btn btn-outline-info">
-                            ویرایش
-                        </button>
-                        <button type="button" title="حذف" class="btn btn-outline-danger">
-                            حذف
-                        </button>
+                        <div class="d-inline-flex">
+                            <div>
+                                <a href="{{route('admins.feature-groups.edit',$group->id)}}"
+                                    class="btn btn-outline-warning">ویرایش</a>
+                            </div>
+                            <div>
+                                <form action="{{route('admins.feature-groups.destroy',$group->id)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-danger mr-1" type="submit"
+                                        onclick="return confirm('آیا از حذف مطمئن هستید؟');">حذف</button>
+                                </form>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 @empty

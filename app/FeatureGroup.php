@@ -8,6 +8,8 @@ class FeatureGroup extends Model
 {
     const FEATURE_GROUPS_TABLE = 'feature_groups';
 
+    protected $fillable = ['name', 'position'];
+
     public function features()
     {
         return $this->hasMany(Feature::class);

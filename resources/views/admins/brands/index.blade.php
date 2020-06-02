@@ -42,13 +42,9 @@
                                 </form>
                             </div>
                         </div>
-                        {{-- <button type="button" title="حذف" class="btn btn-outline-danger">
-                            حذف
-                        </button> --}}
                     </td>
                 </tr>
                 @empty
-
                 @endforelse
             </tbody>
         </table>

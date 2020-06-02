@@ -42,4 +42,14 @@ class FeatureGroupRepository implements FeatureGroupRepositoryInterface
     {
         return FeatureGroup::findOrFail($id);
     }
+
+    public function findByPosition($position)
+    {
+        return FeatureGroup::where('position', $position)->first();
+    }
+
+    public function nextPosition()
+    {
+        return FeatureGroup::max('position') + 1;
+    }
 }
