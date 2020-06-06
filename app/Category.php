@@ -19,12 +19,12 @@ class Category extends Model
         'type' => 'boolean'
     ];
 
-    public function parentCategory()
+    public function parent()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function childCategories()
+    public function childs()
     {
         return $this->hasMany(Category::class);
     }

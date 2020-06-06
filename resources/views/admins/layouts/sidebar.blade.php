@@ -40,15 +40,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admins.feature-groups.index') }}">
-                    <i class="material-icons">vertical_split</i>
-                    <span>گروه ویژگی ها</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{{ route('admins.features.index') }}">
-                    <i class="material-icons">vertical_split</i>
-                    <span>ویژگی ها</span>
+                <a class="nav-link " href="{{ route('admins.brands.index') }}">
+                    <i class="material-icons">view_module</i>
+                    <span>برند</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -58,9 +52,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="{{ route('admins.brands.index') }}">
-                    <i class="material-icons">view_module</i>
-                    <span>برند</span>
+                <a class="nav-link " href="{{ route('admins.feature-groups.index') }}">
+                    <i class="material-icons">vertical_split</i>
+                    <span>گروه ویژگی ها</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admins.features.index') }}">
+                    <i class="material-icons">vertical_split</i>
+                    <span>ویژگی ها</span>
                 </a>
             </li>
             {{-- <li class="nav-item">

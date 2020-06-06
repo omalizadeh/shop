@@ -23,7 +23,7 @@
                                         required>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="slug">نامک (انگلیسی)</label>
+                                    <label for="slug">نامک (انگلیسی برای سئو)</label>
                                     <input type="text" class="form-control" value="{{$brand->getSlug()}}" name="slug">
                                 </div>
                             </div>

@@ -13,6 +13,11 @@ class FeatureGroupRepository implements FeatureGroupRepositoryInterface
         return FeatureGroup::all();
     }
 
+    public function allOrderBy($orderBy = 'id')
+    {
+        return FeatureGroup::orderBy($orderBy, 'ASC')->get();
+    }
+
     public function paginate($perPage)
     {
         return FeatureGroup::paginate($perPage);
@@ -51,5 +56,13 @@ class FeatureGroupRepository implements FeatureGroupRepositoryInterface
     public function nextPosition()
     {
         return FeatureGroup::max('position') + 1;
+    }
+
+    public function updateAndSwapPosition(FeatureGroup $featureGroup, array $data)
+    {
+        return DB::transaction(function () use ($data, $featureGroup) {
+            FeatureGroup::where('position', $data['position'])->update(['position' => $featureGroup->getPosition()]);
+            $this->update($data, $featureGroup->id);
+        });
     }
 }

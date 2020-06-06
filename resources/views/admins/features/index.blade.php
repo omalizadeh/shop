@@ -30,12 +30,20 @@
                     <td>{{ $feature->getPosition() }}</td>
                     <td>{{ $feature->getFeatureGroupName() }}</td>
                     <td>
-                        <button type="button" title="ویرایش" class="btn btn-outline-info">
-                            ویرایش
-                        </button>
-                        <button type="button" title="حذف" class="btn btn-outline-danger">
-                            حذف
-                        </button>
+                        <div class="d-inline-flex">
+                            <div>
+                                <a href="{{route('admins.features.edit',$feature->id)}}"
+                                    class="btn btn-outline-warning">ویرایش</a>
+                            </div>
+                            <div>
+                                <form action="{{route('admins.features.destroy',$feature->id)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-danger mr-1" type="submit"
+                                        onclick="return confirm('آیا از حذف مطمئن هستید؟');">حذف</button>
+                                </form>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 @empty

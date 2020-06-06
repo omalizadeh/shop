@@ -49,9 +49,9 @@
             <main class="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
                 @include('admins.layouts.navbar')
                 <div class="container p-3">
-                    <div class="row justify-content-center">
-                        @yield('content')
-                    </div>
+                    {{-- <div class="row justify-content-center"> --}}
+                    @yield('content')
+                    {{-- </div> --}}
                 </div>
             </main>
         </div>

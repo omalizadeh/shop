@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FeatureGroupUpdateRequest extends FormRequest
+class FeatureUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -15,6 +15,7 @@ class FeatureGroupUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:2|max:255',
+            'feature_group_id' => 'required|exists:feature_groups,id',
             'position' => 'required|integer'
         ];
     }

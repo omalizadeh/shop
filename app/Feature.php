@@ -8,6 +8,8 @@ class Feature extends Model
 {
     const FEATURES_TABLE = 'features';
 
+    protected $fillable = ['feature_group_id', 'name', 'position'];
+
     public function featureGroup()
     {
         return $this->belongsTo(FeatureGroup::class, 'feature_group_id');

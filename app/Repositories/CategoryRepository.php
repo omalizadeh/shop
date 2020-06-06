@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\ArticleCategory;
 use App\Category;
+use App\ProductCategory;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -11,6 +13,16 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function all()
     {
         return Category::all();
+    }
+
+    public function allProductCategories()
+    {
+        return ProductCategory::all();
+    }
+
+    public function allArticleCategories()
+    {
+        return ArticleCategory::all();
     }
 
     public function paginate($perPage)

@@ -10,12 +10,17 @@ class FeaturesSeeder extends Seeder
         Feature::create([
             'feature_group_id' => 1,
             'name' => 'ابعاد',
-            'position' => '1'
+            'position' => 1
         ]);
         Feature::create([
             'feature_group_id' => 1,
             'name' => 'وزن',
-            'position' => '2'
+            'position' => 2
+        ]);
+        Feature::create([
+            'feature_group_id' => 3,
+            'name' => 'وضوح',
+            'position' => 3
         ]);
     }
 }

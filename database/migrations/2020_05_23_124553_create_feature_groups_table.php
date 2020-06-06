@@ -16,7 +16,7 @@ class CreateFeatureGroupsTable extends Migration
         Schema::create('feature_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedSmallInteger('position')->unique();
+            $table->unsignedSmallInteger('position');
             $table->timestamps();
         });
     }

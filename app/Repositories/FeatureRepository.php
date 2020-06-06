@@ -13,6 +13,11 @@ class FeatureRepository implements FeatureRepositoryInterface
         return Feature::all();
     }
 
+    public function allOrderBy($orderBy = 'id')
+    {
+        return Feature::orderBy($orderBy, 'ASC')->get();
+    }
+
     public function paginate($perPage)
     {
         return Feature::paginate($perPage);
@@ -41,5 +46,23 @@ class FeatureRepository implements FeatureRepositoryInterface
     public function findById($id)
     {
         return Feature::findOrFail($id);
+    }
+
+    public function findByPosition($position)
+    {
+        return Feature::where('position', $position)->first();
+    }
+
+    public function nextPosition()
+    {
+        return Feature::max('position') + 1;
+    }
+
+    public function updateAndSwapPosition(Feature $feature, array $data)
+    {
+        return DB::transaction(function () use ($data, $feature) {
+            Feature::where('position', $data['position'])->update(['position' => $feature->getPosition()]);
+            $this->update($data, $feature->id);
+        });
     }
 }

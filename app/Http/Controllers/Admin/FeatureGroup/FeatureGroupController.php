@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\FeatureGroup;
 
 use App\FeatureGroup;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\FeatureGroupRequest;
 use App\Http\Requests\FeatureGroupStoreRequest;
+use App\Http\Requests\FeatureGroupUpdateRequest;
 use App\Repositories\Interfaces\FeatureGroupRepositoryInterface;
 
 class FeatureGroupController extends Controller
@@ -19,7 +19,7 @@ class FeatureGroupController extends Controller
 
     public function index()
     {
-        $featureGroups = $this->featureGroupRepository->all();
+        $featureGroups = $this->featureGroupRepository->allOrderBy('position');
         return view('admins.feature_groups.index', compact('featureGroups'));
     }
 
@@ -49,13 +49,36 @@ class FeatureGroupController extends Controller
         return view('admins.feature_groups.edit', ['group' => $feature_group]);
     }
 
-    public function update(FeatureGroupRequest $request, FeatureGroup $featureGroup)
+    public function update(FeatureGroupUpdateRequest $request, FeatureGroup $feature_group)
     {
-        dd($request->all());
+        $featureGroup = $feature_group;
+        if (
+            $request->input('position') === $featureGroup->getPosition() ||
+            ($request->input('position') !== $featureGroup->getPosition() && $this->featureGroupRepository->findByPosition($request->input('position')) === null)
+        ) {
+            try {
+                $this->featureGroupRepository->update($request->only(['name', 'position']), $featureGroup->id);
+                return redirect()->route('admins.feature-groups.index')->with('success', 'گروه ویژگی ویرایش شد.');
+            } catch (\Exception $ex) {
+                return redirect()->back()->with('fail', $ex->getMessage());
+            }
+        } else {
+            try {
+                $this->featureGroupRepository->updateAndSwapPosition($featureGroup, $request->only(['name', 'position']));
+                return redirect()->route('admins.feature-groups.index')->with('success', 'گروه ویژگی ویرایش شد.');
+            } catch (\Exception $ex) {
+                return redirect()->back()->with('fail', $ex->getMessage());
+            }
+        }
     }
 
-    public function destroy(FeatureGroup $featureGroup)
+    public function destroy(FeatureGroup $feature_group)
     {
-        //
+        try {
+            $this->featureGroupRepository->delete($feature_group->id);
+            return redirect()->route('admins.feature-groups.index')->with('success', 'گروه ویژگی حذف شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 }

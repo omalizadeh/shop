@@ -9,11 +9,15 @@ class FeatureGroupsSeeder extends Seeder
     {
         FeatureGroup::create([
             'name' => 'مشخصات فیزیکی',
-            'position' => '1'
+            'position' => 1
         ]);
         FeatureGroup::create([
             'name' => 'سایر مشخصات',
-            'position' => '2'
+            'position' => 2
+        ]);
+        FeatureGroup::create([
+            'name' => 'صفحه نمایش',
+            'position' => 3
         ]);
     }
 }

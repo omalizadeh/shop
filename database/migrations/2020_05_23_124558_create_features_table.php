@@ -17,7 +17,7 @@ class CreateFeaturesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('feature_group_id');
             $table->string('name');
-            $table->unsignedSmallInteger('position')->unique();
+            $table->unsignedSmallInteger('position');
             $table->timestamps();
 
             $table->foreign('feature_group_id')->references('id')->on('feature_groups')->onDelete('cascade');

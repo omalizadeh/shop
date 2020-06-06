@@ -15,6 +15,7 @@
                     <div class="col">
                         <form action="{{route('admins.feature-groups.update',$group->id)}}" method="post">
                             @csrf
+                            @method('put')
                             <div class="form-row">
                                 <div class="form-group col-lg-6">
                                     <label for="name">نام گروه</label>
@@ -25,9 +26,12 @@
                                     <label for="position">موقعیت</label>
                                     <input type="number" min="1" class="form-control" value="{{$group->getPosition()}}"
                                         name="position">
+                                    <div class="alert alert-warning mt-1">در صورت اشغال بودن موقعیت جدید، دو گروه با هم جابه
+                                        جا
+                                        خواهند شد.</div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">ایجاد</button>
+                            <button type="submit" class="btn btn-primary">ویرایش</button>
                         </form>
                     </div>
                 </div>

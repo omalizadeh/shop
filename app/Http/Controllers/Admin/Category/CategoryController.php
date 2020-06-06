@@ -4,18 +4,23 @@ namespace App\Http\Controllers\Admin\Category;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     public function index()
     {
-        //
+        $articleCategories = $this->categoryRepository->allArticleCategories();
+        $productCategories = $this->categoryRepository->allProductCategories();
+        return view('admins.categories.index', compact('articleCategories', 'productCategories'));
     }
 
     /**
