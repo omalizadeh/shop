@@ -19,6 +19,8 @@ class Category extends Model
         'type' => 'boolean'
     ];
 
+    protected $fillable = ['name', 'slug', 'parent_id', 'type'];
+
     public function parent()
     {
         return $this->belongsTo(Category::class);
@@ -42,5 +44,20 @@ class Category extends Model
     public function getSlug()
     {
         return $this->attributes['slug'];
+    }
+
+    public function getType()
+    {
+        return $this->attributes['type'];
+    }
+
+    public function isProductCategory()
+    {
+        return $this->getType() == self::PRODUCT_CATEGORY;
+    }
+
+    public function isArticleCategory()
+    {
+        return $this->getType() == self::ARTICLE_CATEGORY;
     }
 }

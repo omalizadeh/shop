@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BrandUpdateRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -13,10 +13,11 @@ class BrandUpdateRequest extends FormRequest
 
     public function rules()
     {
-        $brandId = $this->route('brand')->id;
+        $categoryId = $this->route('category')->id;
         return [
             'name' => 'required|string|min:2|max:255',
-            'slug' => 'nullable|string|alpha_dash|unique:brands,slug,' . $brandId
+            'slug' => 'required|string|alpha_dash|unique:categories,slug,' . $categoryId,
+            'parent_id' => 'nullable|exists:categories,id',
         ];
     }
 }

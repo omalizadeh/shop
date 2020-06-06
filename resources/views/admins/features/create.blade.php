@@ -22,7 +22,7 @@
                                         required>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="feature_group">گروه</label>
+                                    <label for="feature_group_id">گروه</label>
                                     <select name="feature_group_id" class="form-control" required>
                                         <option value="">انتخاب...</option>
                                         @foreach ($groups as $group)
