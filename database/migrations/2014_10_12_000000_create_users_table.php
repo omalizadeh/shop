@@ -21,13 +21,15 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique()->nullable();
-            $table->string('mobile', 11)->unique();
             $table->string('tel', 11)->nullable();
             $table->date('birth_date')->nullable();
+            $table->string('mobile', 11)->unique();
             $table->timestamp('mobile_verified_at')->nullable();
             $table->string('password');
+            $table->timestamp('last_seen')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -2,9 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\User;
-
-interface UserRepositoryInterface
+interface RoleRepositoryInterface
 {
     public function all();
 
@@ -14,7 +12,7 @@ interface UserRepositoryInterface
 
     public function update(array $data, $id);
 
-    public function delete(User $user);
+    public function delete($id);
 
     public function findById($id);
 }

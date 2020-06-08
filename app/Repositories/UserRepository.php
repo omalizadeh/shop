@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserRepositoryInterface
@@ -34,7 +33,12 @@ class UserRepository implements UserRepositoryInterface
         return User::where('id', $id)->update($data);
     }
 
-    public function delete($id)
+    public function delete(User $user)
+    {
+        return $user->delete();
+    }
+
+    public function forceDestroy($id)
     {
         return DB::table('users')->delete($id);
     }
@@ -42,5 +46,20 @@ class UserRepository implements UserRepositoryInterface
     public function findById($id)
     {
         return User::findOrFail($id);
+    }
+
+    public function assignRole(User $user, $roleId)
+    {
+        return $user->roles()->attach($roleId);
+    }
+
+    public function removeRole(User $user, $roleId)
+    {
+        return $user->roles()->detach($roleId);
+    }
+
+    public function syncRoles(User $user, array $rolesId)
+    {
+        return $user->roles()->sync($rolesId);
     }
 }

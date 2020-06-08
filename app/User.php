@@ -3,42 +3,29 @@
 namespace App;
 
 use App\Traits\FarsiTimestamps;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Cache;
 
 class User extends Authenticatable
 {
-    use Notifiable, FarsiTimestamps;
+    use Notifiable, FarsiTimestamps, SoftDeletes;
 
     const UNSPECIFIED_GENDER = 1;
     const MALE_GENDER = 2;
     const FEMALE_GENDER = 3;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'national_id', 'birth_date', 'email', 'gender', 'mobile', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'mobile_verified_at' => 'datetime',
     ];
 
     public function cart()
@@ -84,6 +71,30 @@ class User extends Authenticatable
     public function getBirthDate()
     {
         return $this->attributes['birth_date'];
+    }
+
+    public function getGender()
+    {
+        return $this->attributes['gender'];
+    }
+
+    public function isMale()
+    {
+        return $this->getGender() == self::MALE_GENDER;
+    }
+
+    public function isFemale()
+    {
+        return $this->getGender() == self::FEMALE_GENDER;
+    }
+
+    public function isOnline()
+    {
+        if (Cache::has('user-is-online-' . $this->id)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function hasRole($role)

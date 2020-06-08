@@ -28,6 +28,12 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item">
+                <a class="nav-link " href="{{ route('admins.index') }}">
+                    <i class="material-icons">dashboard</i>
+                    <span>داشبورد</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.articles.index') }}">
                     <i class="material-icons">edit</i>
                     <span>وبلاگ و مقالات</span>
@@ -35,31 +41,31 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.products.index') }}">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">shopping_bag</i>
                     <span>محصولات</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.brands.index') }}">
-                    <i class="material-icons">view_module</i>
-                    <span>برند</span>
+                    <i class="material-icons">branding_watermark</i>
+                    <span>برندها</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.categories.index') }}">
-                    <i class="material-icons">note_add</i>
+                    <i class="material-icons">category</i>
                     <span>دسته بندی</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.feature-groups.index') }}">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">edit_attributes</i>
                     <span>گروه ویژگی ها</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.features.index') }}">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">edit_attributes</i>
                     <span>ویژگی ها</span>
                 </a>
             </li>
@@ -71,8 +77,14 @@
             </li> --}}
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('admins.orders.index') }}">
-                    <i class="material-icons">table_chart</i>
+                    <i class="material-icons">shopping_cart</i>
                     <span>سفارشات</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admins.users.index') }}">
+                    <i class="material-icons">people</i>
+                    <span>کاربران</span>
                 </a>
             </li>
             {{-- <li class="nav-item">
@@ -89,7 +101,7 @@
             </li> --}}
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('admins.messages.index') }}">
-                    <i class="material-icons">error</i>
+                    <i class="material-icons">message</i>
                     <span>پیام ها</span>
                 </a>
             </li>

@@ -31,6 +31,7 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->singleton(\App\Repositories\Interfaces\ProductRepositoryInterface::class, \App\Repositories\ProductRepository::class);
         $this->app->singleton(\App\Repositories\Interfaces\FeatureGroupRepositoryInterface::class, \App\Repositories\FeatureGroupRepository::class);
         $this->app->singleton(\App\Repositories\Interfaces\FeatureRepositoryInterface::class, \App\Repositories\FeatureRepository::class);
+        $this->app->singleton(\App\Repositories\Interfaces\RoleRepositoryInterface::class, \App\Repositories\RoleRepository::class);
         // extended classes
     }
 }

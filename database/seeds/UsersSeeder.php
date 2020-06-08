@@ -24,8 +24,8 @@ class UsersSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'اصغر',
-            'last_name' => 'اکبری',
+            'first_name' => 'علی',
+            'last_name' => 'صادقی',
             'national_id' => '9822835442',
             'tel' => '02511111331',
             'mobile' => '09128835252',
@@ -36,7 +36,7 @@ class UsersSeeder extends Seeder
 
         User::create([
             'first_name' => 'مریم',
-            'last_name' => 'مهرابی',
+            'last_name' => 'فاریابی',
             'national_id' => '0022835442',
             'tel' => '02566611331',
             'mobile' => '09132235252',
