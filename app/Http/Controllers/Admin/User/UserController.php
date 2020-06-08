@@ -42,7 +42,7 @@ class UserController extends Controller
         $request->merge(['password' => Hash::make($request->input('password'))]);
         try {
             DB::transaction(function () use ($request) {
-                $user = $this->userRepository->create($request->only(['first_name', 'last_name', 'mobile', 'birth_date', 'national_id', 'password']));
+                $user = $this->userRepository->create($request->only(['first_name', 'last_name', 'gender', 'mobile', 'birth_date', 'national_id', 'password']));
                 event(new NewUserRegistered($user, $request->input('role_id')));
             });
             return redirect()->route('admins.users.index')->with('success', 'کاربر ثبت نام شد.');
@@ -64,16 +64,16 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, User $user)
     {
-        $updateData = $request->only(['first_name', 'last_name', 'mobile', 'birth_date', 'national_id', 'password']);
+        $updateData = $request->only(['first_name', 'last_name', 'gender', 'mobile', 'birth_date', 'national_id']);
         if ($request->input('password') !== null) {
             $updateData += ['password' => Hash::make($request->input('password'))];
         }
         try {
             DB::transaction(function () use ($user, $updateData, $request) {
-                $user = $this->userRepository->update($updateData, $user->id);
-                event(new NewUserRegistered($user, $request->input('role_id')));
+                $this->userRepository->update($updateData, $user->id);
+                $this->userRepository->syncRoles($user, $request->input('role_ids'));
             });
-            return redirect()->route('admins.users.index')->with('success', 'کاربر ثبت نام شد.');
+            return redirect()->route('admins.users.index')->with('success', 'مشخصات کاربر بروز شد.');
         } catch (\Exception $ex) {
             return redirect()->back()->with('fail', $ex->getMessage());
         }

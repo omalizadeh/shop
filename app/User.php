@@ -26,6 +26,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'mobile_verified_at' => 'datetime',
+        'gender' => 'integer'
     ];
 
     public function cart()
@@ -80,12 +81,12 @@ class User extends Authenticatable
 
     public function isMale()
     {
-        return $this->getGender() == self::MALE_GENDER;
+        return $this->getGender() === self::MALE_GENDER;
     }
 
     public function isFemale()
     {
-        return $this->getGender() == self::FEMALE_GENDER;
+        return $this->getGender() === self::FEMALE_GENDER;
     }
 
     public function isOnline()

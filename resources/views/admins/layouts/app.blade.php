@@ -84,6 +84,7 @@
     <script src="{{ asset('panel-assets/node_modules/datepicker/persian-date.min.js') }}"></script>
     <script src="{{ asset('panel-assets/node_modules/datepicker/persian-datepicker.min.js') }}"></script>
     <script src="{{ asset('panel-assets/scripts/app/app-blog-overview.1.1.0.js') }}"></script>
+    <script src="{{ asset('panel-assets/scripts/app/app-components-overview.1.1.0.min.js') }}"></script>
     @yield('script')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.js"></script>

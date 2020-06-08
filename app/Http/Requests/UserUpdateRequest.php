@@ -22,7 +22,8 @@ class UserUpdateRequest extends FormRequest
             'birth_date' => 'nullable|date',
             'mobile' => 'required|numeric|digits:11|unique:users,mobile,' . $userId,
             'password' => 'nullable|min:6|confirmed',
-            'role_id' => 'required|exists:roles,id'
+            'role_ids' => 'required|array|min:1',
+            'role_ids.*' => 'exists:roles,id'
         ];
     }
 }

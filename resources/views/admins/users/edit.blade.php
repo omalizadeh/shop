@@ -16,6 +16,7 @@
                         <div class="alert alert-warning">پر کردن موارد ستاره دار * الزامی است.</div>
                         <form action="{{route('admins.users.update',$user->id)}}" method="post">
                             @csrf
+                            @method('put')
                             <div class="form-row">
                                 <div class="form-group col-lg-6">
                                     <label for="first_name">نام *</label>
@@ -57,27 +58,35 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-lg-6">
-                                    <label for="role_id">نقش کاربری *</label>
+                                    <label for="password">رمز عبور *</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="password_confirmation">تایید رمز عبور *</label>
+                                    <input type="password" class="form-control" name="password_confirmation">
+                                </div>
+                            </div>
+                            <div class="form-row mb-1">
+                                <label for="roles">نقش کاربری *</label>
+                                @foreach ($roles as $role)
+                                <div class="form-check form-check-inline" id="roles">
+                                    <input class="form-check-input" type="checkbox" id="role_{{$role->id}}"
+                                        value="{{$role->id}}" name="role_ids[]" @if($user->hasRole($role->getName()))
+                                    checked @endif>
+                                    <label class="form-check-label"
+                                        for="role_{{$role->id}}">{{$role->getFarsiName()}}</label>
+                                </div>
+                                @endforeach
+                                {{-- <label for="role_id">نقش کاربری *</label>
                                     <select name="role_id" class="form-control" required>
                                         <option value="">انتخاب...</option>
                                         @foreach ($roles as $role)
                                         <option value="{{$role->id}}" @if($user->hasRole($role->getName())) selected
-                                            @endif>{{$role->getFarsiName()}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                @endif>{{$role->getFarsiName()}}</option>
+                                @endforeach
+                                </select> --}}
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-lg-6">
-                                    <label for="password">رمز عبور *</label>
-                                    <input type="password" class="form-control" name="password" required>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label for="password_confirmation">تایید رمز عبور *</label>
-                                    <input type="password" class="form-control" name="password_confirmation" required>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">ثبت نام</button>
+                            <button type="submit" class="btn btn-primary">بروزرسانی</button>
                         </form>
                     </div>
                 </div>
