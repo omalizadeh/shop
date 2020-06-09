@@ -17,6 +17,7 @@ class CreateAttributesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('attribute_group_id');
             $table->string('value');
+            $table->string('color', 7)->nullable();
             $table->timestamps();
 
             $table->foreign('attribute_group_id')->references('id')->on('attribute_groups')->onDelete('cascade');

@@ -20,4 +20,9 @@ class Attribute extends Model
     {
         return $this->attributes['value'];
     }
+
+    public function getColor()
+    {
+        return $this->attributes['color'];
+    }
 }
