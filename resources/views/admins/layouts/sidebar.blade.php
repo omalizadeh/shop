@@ -69,6 +69,12 @@
                     <span>ویژگی ها</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{{ route('admins.attribute-groups.index') }}">
+                    <i class="material-icons">edit_attributes</i>
+                    <span>گروه ترکیبات</span>
+                </a>
+            </li>
             {{-- <li class="nav-item">
                 <a class="nav-link " href="{{ route('slider.index') }}">
             <i class="material-icons">view_module</i>

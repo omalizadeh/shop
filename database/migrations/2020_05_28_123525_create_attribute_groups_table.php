@@ -12,7 +12,7 @@ class CreateAttributeGroupsTable extends Migration
         Schema::create('attribute_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedSmallInteger('position')->unique();
+            $table->unsignedSmallInteger('position');
             $table->unsignedTinyInteger('type')->default(AttributeGroup::DROPDOWN_ATTRIBUTE);
             $table->timestamps();
         });

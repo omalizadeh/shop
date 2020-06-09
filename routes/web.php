@@ -22,6 +22,7 @@ Route::get('/', 'Front\Home\IndexController@index')->name('index');
 Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function () {
     Route::get('', 'Admin\Home\IndexController@index')->name('index');
     Route::resource('articles', 'Admin\Article\ArticleController');
+    Route::resource('attribute-groups', 'Admin\AttributeGroup\AttributeGroupController');
     Route::resource('products', 'Admin\Product\ProductController');
     Route::resource('brands', 'Admin\Brand\BrandController');
     Route::resource('discounts', 'Admin\Discount\DiscountController');
