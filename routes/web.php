@@ -36,8 +36,10 @@ Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function 
     Route::resource('messages', 'Admin\Message\MessageController');
     Route::resource('orders', 'Admin\Order\OrderController');
     Route::resource('categories', 'Admin\Category\CategoryController');
-});
 
+    Route::get('attribute-groups/{attributeGroup}/add-attribute', 'Admin\AttributeGroup\AttributeGroupController@addAttribute')->name('attribute-groups.add_attribute');
+    Route::post('attribute-groups/{attributeGroup}/store-attribute', 'Admin\AttributeGroup\AttributeGroupController@storeAttribute')->name('attribute-groups.store_attribute');
+});
 
 Route::resource('brands', 'Front\Brand\BrandController');
 Route::resource('articles', 'Front\Article\ArticleController');

@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Interfaces;
 
-interface AttributeGroupRepositoryInterface
+interface AttributeRepositoryInterface
 {
     public function all();
 

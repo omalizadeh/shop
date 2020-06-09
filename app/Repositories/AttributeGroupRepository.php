@@ -53,6 +53,11 @@ class AttributeGroupRepository implements AttributeGroupRepositoryInterface
         return AttributeGroup::where('position', $position)->first();
     }
 
+    public function attributes(AttributeGroup $attributeGroup)
+    {
+        return $attributeGroup->attributes;
+    }
+
     public function nextPosition()
     {
         return AttributeGroup::max('position') + 1;

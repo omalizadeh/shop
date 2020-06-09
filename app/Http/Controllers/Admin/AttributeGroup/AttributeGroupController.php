@@ -6,14 +6,17 @@ use App\AttributeGroup;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AttributeGroupStoreRequest;
 use App\Http\Requests\AttributeGroupUpdateRequest;
+use App\Http\Requests\AttributeStoreRequest;
 use App\Repositories\Interfaces\AttributeGroupRepositoryInterface;
 
 class AttributeGroupController extends Controller
 {
     private $attributeGroupRepository;
+    private $attributeRepository;
 
-    public function __construct(AttributeGroupRepositoryInterface $attributeGroupRepository)
-    {
+    public function __construct(
+        AttributeGroupRepositoryInterface $attributeGroupRepository
+    ) {
         $this->attributeGroupRepository = $attributeGroupRepository;
     }
 
@@ -39,9 +42,10 @@ class AttributeGroupController extends Controller
         }
     }
 
-    public function show(AttributeGroup $attributeGroup)
+    public function show(AttributeGroup $attribute_group)
     {
-        //
+        $attributes = $this->attributeGroupRepository->attributes($attribute_group);
+        return view('admins.attribute_groups.show', ['group' => $attribute_group, 'attributes' => $attributes]);
     }
 
     public function edit(AttributeGroup $attribute_group)
@@ -80,5 +84,14 @@ class AttributeGroupController extends Controller
         } catch (\Exception $ex) {
             return redirect()->back()->with('fail', $ex->getMessage());
         }
+    }
+
+    public function addAttribute(AttributeGroup $attributeGroup)
+    {
+        return view('admins.attribute_groups.add_attribute', ['group' => $attributeGroup]);
+    }
+
+    public function storeAttribute(AttributeStoreRequest $request, AttributeGroup $attributeGroup)
+    {
     }
 }

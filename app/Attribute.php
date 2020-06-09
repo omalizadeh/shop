@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
+    const ATTRIBUTES_TABLE = 'attributes';
+
     public function attributeGroup()
     {
         return $this->belongsTo(AttributeGroup::class);
