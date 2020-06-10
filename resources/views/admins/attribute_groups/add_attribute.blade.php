@@ -23,8 +23,8 @@
                                 </div>
                                 @if($group->isColor())
                                 <div class="form-group col-lg-6">
-                                    <label for="color">نوع</label>
-                                    <input type="color" class="form-control" name="color">
+                                    <label for="color">رنگ</label>
+                                    <input type="color" class="form-control" name="color" value="{{old('color')}}">
                                 </div>
                                 @endif
                             </div>

@@ -8,6 +8,10 @@ class Attribute extends Model
 {
     const ATTRIBUTES_TABLE = 'attributes';
 
+    protected $fillable = [
+        'value', 'attribute_group_id', 'color'
+    ];
+
     public function attributeGroup()
     {
         return $this->belongsTo(AttributeGroup::class);
@@ -26,5 +30,10 @@ class Attribute extends Model
     public function getColor()
     {
         return $this->attributes['color'];
+    }
+
+    public function isColor()
+    {
+        return $this->attributeGroup->isColor();
     }
 }

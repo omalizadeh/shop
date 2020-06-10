@@ -31,7 +31,9 @@
                     <td>{{ $attribute->id }}</td>
                     <td>{{ $attribute->getValue() }}</td>
                     @if($group->isColor())
-                    <td>{{ $attribute->getPosition() }}</td>
+                    <td>
+                        <button class="btn btn-circle" style="background-color: {{ $attribute->getColor() }}"></button>
+                    </td>
                     @endif
                     <td>
                         <div class="d-inline-flex">

@@ -8,6 +8,7 @@ use App\Http\Requests\AttributeGroupStoreRequest;
 use App\Http\Requests\AttributeGroupUpdateRequest;
 use App\Http\Requests\AttributeStoreRequest;
 use App\Repositories\Interfaces\AttributeGroupRepositoryInterface;
+use App\Repositories\Interfaces\AttributeRepositoryInterface;
 
 class AttributeGroupController extends Controller
 {
@@ -15,9 +16,11 @@ class AttributeGroupController extends Controller
     private $attributeRepository;
 
     public function __construct(
-        AttributeGroupRepositoryInterface $attributeGroupRepository
+        AttributeGroupRepositoryInterface $attributeGroupRepository,
+        AttributeRepositoryInterface $attributeRepository
     ) {
         $this->attributeGroupRepository = $attributeGroupRepository;
+        $this->attributeRepository = $attributeRepository;
     }
 
     public function index()
@@ -93,5 +96,17 @@ class AttributeGroupController extends Controller
 
     public function storeAttribute(AttributeStoreRequest $request, AttributeGroup $attributeGroup)
     {
+        $request->merge(['attribute_group_id' => $attributeGroup->id]);
+        if ($attributeGroup->isDropdown()) {
+            $request->merge(['color' => null]);
+        } else {
+            $request->validate(['color' => 'required|regex:/#[a-fA-F0-9]{6}/']);
+        }
+        try {
+            $this->attributeRepository->create($request->only(['value', 'attribute_group_id', 'color']));
+            return redirect()->route('admins.attribute-groups.show', $attributeGroup->id)->with('success', 'مقدار اضافه شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 }
