@@ -6,17 +6,17 @@ use App\Classes\Persianalize;
 
 trait FarsiTimestamps
 {
-    protected function getCreatedAtDate()
+    protected function getFarsiCreatedAtDate()
     {
         return Persianalize::farsiDate($this->attributes['created_at']);
     }
 
-    protected function getCreatedAtDateTime()
+    protected function getFarsiCreatedAtDateTime()
     {
         return Persianalize::farsiDateTime($this->attributes['created_at']);
     }
 
-    protected function getUpdatedAtDate()
+    protected function getFarsiUpdatedAtDate()
     {
         if ($this->attributes['updated_at'] !== null) {
             return Persianalize::farsiDate($this->attributes['updated_at']);
@@ -25,7 +25,7 @@ trait FarsiTimestamps
         }
     }
 
-    protected function getUpdatedAtDateTime()
+    protected function getFarsiUpdatedAtDateTime()
     {
         if ($this->attributes['updated_at'] !== null) {
             return Persianalize::farsiDateTime($this->attributes['updated_at']);

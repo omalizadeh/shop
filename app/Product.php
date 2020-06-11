@@ -12,7 +12,8 @@ class Product extends Model
     const PRODUCTS_TABLE = 'products';
 
     protected $casts = [
-        'on_sale' => 'boolean'
+        'on_sale' => 'boolean',
+        'is_active' => 'boolean'
     ];
 
     public function brand()
@@ -28,6 +29,11 @@ class Product extends Model
     public function tags()
     {
         return $this->belongsToMany(ProductTag::class, 'product_tag');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function getBrandId()
@@ -103,5 +109,20 @@ class Product extends Model
     public function isActive()
     {
         return $this->attributes['is_active'] === true;
+    }
+
+    public function getBrandName()
+    {
+        if ($this->brand) {
+            return  $this->brand->getName();
+        } else {
+            return null;
+        }
+    }
+
+    public function getDefaultCategoryName()
+    {
+        $category = $this->categories()->wherePivot('is_default', true)->first();
+        return $category->getName();
     }
 }

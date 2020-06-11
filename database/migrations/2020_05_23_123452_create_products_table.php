@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->string('meta_description')->nullable();
             $table->unsignedInteger('total_sold')->default(0);
             $table->boolean('on_sale')->default(true);
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
 
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
