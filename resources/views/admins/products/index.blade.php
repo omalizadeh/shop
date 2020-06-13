@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admins.layouts.app')
 @section('title')
 محصولات
 @endsection
@@ -9,8 +9,8 @@
             <h6 class="m-0">
                 لیست محصولات
                 <div class="float-right">
-                    <a href="{{ route('admins.products.create') }}" class="btn btn-outline-success">
-                        <i class="material-icons">text_rotation_none</i> افزودن محصول جدید
+                    <a href="{{ route('admins.products.create') }}" class="btn btn-success">
+                        <i class="material-icons">add</i> افزودن محصول جدید
                     </a>
                     {{-- <a href="{{ route('product.index') }}?status=delete" class="btn btn-outline-warning">
                     <i class="material-icons">restore_from_trash</i> محصولات حدف شده
@@ -18,7 +18,7 @@
                 </div>
             </h6>
         </div>
-        <div class="card-body p-0 pb-3 text-center">
+        <div class="card-body p-0 pb-1 text-center">
             <table class="table mb-0">
                 <thead class="bg-light">
                     <tr>
@@ -41,24 +41,31 @@
                         <td>{{ $product->getBarcode() }}</td>
                         <td>{{ $product->getDefaultCategoryName() }}</td>
                         @if($product->isActive())
-                        <td class="text-success">فعال</td>
+                        <td>
+                            <a href="{{route('admins.products.change_status',$product->id)}}"
+                                class="btn btn-sm btn-success"><i
+                                    class="material-icons">check</i></a>
+                        </td>
                         @else
-                        <td class="text-danger">غیرفعال</td>
+                        <td>
+                            <a href="{{route('admins.products.change_status',$product->id)}}"
+                                class=" btn btn-sm btn-danger"><i
+                                    class="material-icons">cancel</i></a>
+                        </td>
                         @endif
                         <td>{{ $product->getFarsiCreatedAtDateTime()}}</td>
                         <td>
                             <div class="d-inline-flex">
                                 <div>
-                                    <a href="{{route('admins.attribute-groups.show',$group->id)}}"
+                                    <a href="{{route('admins.products.show',$product->id)}}"
                                         class="btn btn-outline-success">مشاهده</a>
                                 </div>
                                 <div>
-                                    <a href="{{route('admins.attribute-groups.edit',$group->id)}}"
-                                        class="btn btn-outline-warning mr-2">ویرایش</a>
+                                    <a href="{{route('admins.products.edit',$product->id)}}"
+                                        class="btn btn-outline-warning mr-1">ویرایش</a>
                                 </div>
                                 <div>
-                                    <form action="{{route('admins.attribute-groups.destroy',$group->id)}}"
-                                        method="post">
+                                    <form action="{{route('admins.products.destroy',$product->id)}}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-outline-danger mr-1" type="submit"

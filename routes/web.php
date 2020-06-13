@@ -40,6 +40,8 @@ Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function 
 
     Route::get('attribute-groups/{attributeGroup}/add-attribute', 'Admin\AttributeGroup\AttributeGroupController@addAttribute')->name('attribute-groups.add_attribute');
     Route::post('attribute-groups/{attributeGroup}/store-attribute', 'Admin\AttributeGroup\AttributeGroupController@storeAttribute')->name('attribute-groups.store_attribute');
+
+    Route::get('products/{product}/change-status', 'Admin\Product\ProductController@changeStatus')->name('products.change_status');
 });
 
 Route::resource('brands', 'Front\Brand\BrandController');

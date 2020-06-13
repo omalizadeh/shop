@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('stock')->default(0);
             $table->decimal('avg_rate', 2, 1)->default(5.0);
             $table->unsignedInteger('views')->default(0);
+            $table->string('insta_link')->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->unsignedInteger('total_sold')->default(0);

@@ -23,7 +23,7 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(ProductCategory::class, 'category_product');
+        return $this->belongsToMany(ProductCategory::class, 'category_product', 'product_id', 'category_id');
     }
 
     public function tags()
@@ -103,12 +103,12 @@ class Product extends Model
 
     public function isOnSale()
     {
-        return $this->attributes['on_sale'] === true;
+        return $this->attributes['on_sale'] == true;
     }
 
     public function isActive()
     {
-        return $this->attributes['is_active'] === true;
+        return $this->attributes['is_active'] == true;
     }
 
     public function getBrandName()
@@ -123,6 +123,10 @@ class Product extends Model
     public function getDefaultCategoryName()
     {
         $category = $this->categories()->wherePivot('is_default', true)->first();
-        return $category->getName();
+        if ($category) {
+            return $category->getName();
+        } else {
+            return null;
+        }
     }
 }

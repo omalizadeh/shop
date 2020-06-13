@@ -225,6 +225,6 @@ class Persianalize
 
     public static function farsiDateTime($dateTime)
     {
-        return CalendarUtils::convertNumbers(jdate($dateTime)->format('H:i Y/m/d'));
+        return CalendarUtils::convertNumbers(jdate($dateTime)->format('H:i - Y/m/d'));
     }
 }

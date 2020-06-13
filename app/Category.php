@@ -28,7 +28,7 @@ class Category extends Model
 
     public function childs()
     {
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function getParentId()
@@ -59,5 +59,15 @@ class Category extends Model
     public function isArticleCategory()
     {
         return $this->getType() == self::ARTICLE_CATEGORY;
+    }
+
+    public function hasParent()
+    {
+        return $this->parent !== null;
+    }
+
+    public function hasChild()
+    {
+        return $this->childs !== null;
     }
 }
