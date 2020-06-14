@@ -8,15 +8,17 @@
                 @forelse($categories as $category)
                 @if(!$category->hasParent())
                 <div class="custom-control custom-checkbox mb-1">
-                    <input checked type="radio" name="category_id" value="{{ $category->id }}"
-                        class="custom-control-input" id="{{ 'category' }}-{{ $category->id }}">
+                    <input type="checkbox" name="category_ids[]" value="{{ $category->id }}"
+                        class="custom-control-input" id="{{ 'category' }}-{{ $category->id }}" @if(isset($product) &&
+                        $product->categories->contains('id',$category->id)) checked @endif>
                     <label class="custom-control-label"
                         for="{{ 'category' }}-{{ $category->id }}">{{ $category->getName() }}</label>
                 </div>
                 @foreach ($category->childs as $child)
                 <div class="custom-control custom-checkbox mb-1 mr-4">
-                    <input checked type="radio" name="category_id" value="{{ $child->id }}" class="custom-control-input"
-                        id="{{ 'child' }}-{{ $child->id }}">
+                    <input type="checkbox" name="category_ids[]" value="{{ $child->id }}" class="custom-control-input"
+                        id="{{ 'child' }}-{{ $child->id }}" @if(isset($product) &&
+                        $product->categories->contains('id',$child->id)) checked @endif>
                     <label class="custom-control-label"
                         for="{{ 'child' }}-{{ $child->id }}">{{ $child->getName() }}</label>
                 </div>

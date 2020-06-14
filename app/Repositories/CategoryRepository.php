@@ -54,4 +54,9 @@ class CategoryRepository implements CategoryRepositoryInterface
     {
         return Category::findOrFail($id);
     }
+
+    public function parent(Category $category)
+    {
+        return $category->parent;
+    }
 }

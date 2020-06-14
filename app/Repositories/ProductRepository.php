@@ -42,4 +42,14 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::findOrFail($id);
     }
+
+    public function syncCategories(Product $product, array $categoryIds)
+    {
+        return $product->categories()->sync($categoryIds);
+    }
+
+    public function setDefaultCategory(Product $product, $categoryId)
+    {
+        return $product->categories()->wherePivot('category_id', $categoryId)->update(['is_default' => true]);
+    }
 }

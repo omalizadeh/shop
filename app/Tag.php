@@ -13,9 +13,4 @@ class Tag extends Model
     {
         return $this->attributes['name'];
     }
-
-    public function getSlug()
-    {
-        return $this->attributes['slug'];
-    }
 }

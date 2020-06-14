@@ -11,6 +11,20 @@ class Product extends Model
 
     const PRODUCTS_TABLE = 'products';
 
+    protected $fillable = [
+        'name',
+        'description',
+        'barcode',
+        'brand_id',
+        'slug',
+        'meta_title',
+        'meta_description',
+        'insta_link',
+        'stock',
+        'price',
+        'weight'
+    ];
+
     protected $casts = [
         'on_sale' => 'boolean',
         'is_active' => 'boolean'
@@ -94,6 +108,11 @@ class Product extends Model
     public function getMetaDescription()
     {
         return $this->attributes['meta_description'];
+    }
+
+    public function getInstaLink()
+    {
+        return $this->attributes['insta_link'];
     }
 
     public function getTotalSold()

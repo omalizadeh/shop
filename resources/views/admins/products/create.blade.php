@@ -24,7 +24,7 @@
                         <div class="card card-small mb-3">
                             <div class="card-header border-bottom">
                                 <h6 class="m-0">
-                                    <span class="float-left">نام و توضیحات</span>
+                                    <span class="float-left">مشخصات محصول</span>
                                 </h6>
                             </div>
                             <div class="card-body">
@@ -43,6 +43,34 @@
                                             id="editor" class="mb-1">{{old('description')}}</textarea>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-4">
+                                        <label for="price">قیمت پایه</label>
+                                        <input name="price" value="{{old('price')}}"
+                                            class="form-control form-control-lg mb-3" type="number" min="0"
+                                            placeholder="150000">
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label for="weight">وزن (کیلوگرم)</label>
+                                        <input name="weight" value="{{old('weight')}}"
+                                            class="form-control form-control-lg mb-3" type="text" placeholder="1.250">
+                                    </div>
+                                    <div class="form-group col-lg-4">
+                                        <label for="stock">موجودی در انبار</label>
+                                        <input name="stock" value="{{old('stock')}}"
+                                            class="form-control form-control-lg mb-3" type="number" min="0"
+                                            placeholder="5">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-4">
+                                        <label for="on_sale">وضعیت</label>
+                                        <select name="on_sale" class="form-control">
+                                            <option value="0">ناموجود</option>
+                                            <option value="1">موجود برای فروش</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card card-small mb-3">
@@ -54,42 +82,46 @@
                             <div class="card-body">
                                 <div class="form-row">
                                     <div class="form-group col-lg-12">
+                                        <label for="slug">نامک</label>
+                                        <input type="text" class="form-control" name="slug" placeholder="نامک (انگلیسی)"
+                                            value="{{old('slug')}}">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-12">
                                         <label for="meta_title">عنوان</label>
                                         <input type="text" class="form-control" name="meta_title"
-                                            placeholder="عنوان مطلب برای موتور های جستجوگر">
+                                            placeholder="عنوان مطلب برای موتور های جستجوگر"
+                                            value="{{old('meta_title')}}">
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-lg-12">
                                         <label for="meta_description">توضیحات</label>
                                         <input type="text" class="form-control" name="meta_description"
-                                            placeholder="توضیحات مختصر برای موتور های جستجوگر">
+                                            placeholder="توضیحات مختصر برای موتور های جستجوگر"
+                                            value="{{old('meta_description')}}">
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="form-group col-lg-6">
-                                        <label for="tags">برچسب ها</label>
-                                        <input type="text" class="form-control" name="tags" value="{{old('tags')}}"
-                                            placeholder="با , جدا شود">
-                                    </div>
-                                    <div class="form-group col-lg-6">
+                                    <div class="form-group col-lg-12">
                                         <label for="insta_link">لینک محصول در اینستاگرام</label>
                                         <input type="url" class="form-control" name="insta_link"
                                             value="{{old('insta_link')}}" placeholder="https://instagram.com/post">
                                     </div>
                                 </div>
-                            </div><!-- card -->
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <!-- Post Overview -->
                         <div class='card card-small mb-3'>
                             <div class="card-header border-bottom">
-                                <h6 class="m-0">شناسه داخلی محصول</h6>
+                                <h6 class="m-0">شناسه</h6>
                             </div>
                             <div class='card-body p-2'>
-                                <label for="barcode">شناسه داخلی محصول را وارد کنید</label>
-                                <input type="text" class="form-control" name="barcode">
+                                <label for="barcode">شناسه داخلی محصول</label>
+                                <input type="text" class="form-control" name="barcode" value="{{old('barcode')}}">
                             </div>
                         </div>
                         <!-- / Post Overview -->
@@ -109,6 +141,8 @@
 @endsection
 
 @section('script')
+<script src="{{asset('panel-assets/tinymce/tinymce.min.js')}}"></script>
+<script src="{{asset('panel-assets/tinymce/editor.js')}}"></script>
 {{-- <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 <script>
     // CKEDITOR.replace('editor', {contentsLangDirection: 'rtl'});

@@ -16,9 +16,9 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->string('slug')->unique();
             $table->unsignedInteger('price')->default(0);
-            $table->unsignedDecimal('weight', 3, 3)->default(0.123);
-            $table->unsignedInteger('stock')->default(0);
-            $table->decimal('avg_rate', 2, 1)->default(5.0);
+            $table->unsignedDecimal('weight', 6, 3)->default(0.123)->nullable();
+            $table->unsignedInteger('stock')->default(0);;
+            $table->decimal('avg_rate', 2, 1)->default(0.0);
             $table->unsignedInteger('views')->default(0);
             $table->string('insta_link')->nullable();
             $table->string('meta_title')->nullable();
