@@ -16,7 +16,7 @@
         <div class="card-body p-4 text-center">
             <div class="alert alert-warning">برای درج تصاویر و ویژگی های محصول، پس از ثبت، از قسمت ویرایش محصول استفاده
                 کنید.</div>
-            <form method="post" action="{{ route('admins.products.store')}}">
+            <form method="post" action="{{ route('admins.products.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
@@ -46,18 +46,18 @@
                                 <div class="form-row">
                                     <div class="form-group col-lg-4">
                                         <label for="price">قیمت پایه</label>
-                                        <input name="price" value="{{old('price')}}"
+                                        <input name="price" value="{{old('price') ?? 0}}"
                                             class="form-control form-control-lg mb-3" type="number" min="0"
                                             placeholder="150000">
                                     </div>
                                     <div class="form-group col-lg-4">
                                         <label for="weight">وزن (کیلوگرم)</label>
-                                        <input name="weight" value="{{old('weight')}}"
+                                        <input name="weight" value="{{old('weight') ?? 0.1}}"
                                             class="form-control form-control-lg mb-3" type="text" placeholder="1.250">
                                     </div>
                                     <div class="form-group col-lg-4">
                                         <label for="stock">موجودی در انبار</label>
-                                        <input name="stock" value="{{old('stock')}}"
+                                        <input name="stock" value="{{old('stock') ?? 0}}"
                                             class="form-control form-control-lg mb-3" type="number" min="0"
                                             placeholder="5">
                                     </div>
@@ -140,6 +140,17 @@
                             <div class='card-body p-2'>
                                 <label for="barcode">شناسه داخلی محصول</label>
                                 <input type="text" class="form-control" name="barcode" value="{{old('barcode')}}">
+                            </div>
+                        </div>
+                        <div class='card card-small mb-3'>
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">تصویر پیشفرض</h6>
+                                <small>( قابلیت انتخاب چند تصویر)</small>
+                            </div>
+                            <div class='card-body p-2'>
+                                <label for="photo"></label>
+                                <input accept="image/jpeg,image/jpg,image/png,image/gif" type="file" id="photo" multiple
+                                    name="images[]">
                             </div>
                         </div>
                         <!-- / Post Overview -->

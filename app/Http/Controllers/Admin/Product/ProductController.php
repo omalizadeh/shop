@@ -48,6 +48,7 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request)
     {
+        dd($request->all());
         $selectedCategories = $request->input('category_ids');
         if (!in_array($request->input('default_category_id'), $selectedCategories, true)) {
             $selectedCategories += $request->input('default_category_id');
