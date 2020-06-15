@@ -48,6 +48,11 @@ class ProductRepository implements ProductRepositoryInterface
         return $product->categories()->sync($categoryIds);
     }
 
+    public function syncFeatures(Product $product, array $features)
+    {
+        return $product->features()->sync($features);
+    }
+
     public function setDefaultCategory(Product $product, $categoryId)
     {
         return $product->categories()->wherePivot('category_id', $categoryId)->update(['is_default' => true]);

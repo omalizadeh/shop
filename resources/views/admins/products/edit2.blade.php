@@ -76,6 +76,30 @@
                         <div class="card card-small mb-3">
                             <div class="card-header border-bottom">
                                 <h6 class="m-0">
+                                    <span class="float-left">ویژگی ها</span>
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                @foreach ($features as $feature)
+                                @php
+                                if(isset($product)){
+                                $productFeatures = $product->features;
+                                }
+                                @endphp
+                                <div class="form-row">
+                                    <div class="form-group col-lg-12">
+                                        <label for="{{$feature->id}}">{{$feature->getName()}}</label>
+                                        <input type="text" class="form-control" name="features[{{$feature->id}}]"
+                                            id="{{$feature->id}}"
+                                            value="@if(isset($productFeatures) && $productFeatures->contains('id',$feature->id)) {{$productFeatures->firstWhere('id',$feature->id)->pivot->value}} @endif">
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="card card-small mb-3">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">
                                     <span class="float-left">تنظیمات سئو</span>
                                 </h6>
                             </div>
@@ -135,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary float-left">ثبت محصول</button>
+                <button type="submit" class="btn btn-lg btn-primary float-left">بروزرسانی</button>
             </form>
         </div>
     </div>

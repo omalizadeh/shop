@@ -76,6 +76,24 @@
                         <div class="card card-small mb-3">
                             <div class="card-header border-bottom">
                                 <h6 class="m-0">
+                                    <span class="float-left">ویژگی ها</span>
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                @foreach ($features as $feature)
+                                <div class="form-row">
+                                    <div class="form-group col-lg-12">
+                                        <label for="{{$feature->id}}">{{$feature->getName()}}</label>
+                                        <input type="text" class="form-control" name="features[{{$feature->id}}]"
+                                            id="{{$feature->id}}">
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="card card-small mb-3">
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">
                                     <span class="float-left">تنظیمات سئو</span>
                                 </h6>
                             </div>

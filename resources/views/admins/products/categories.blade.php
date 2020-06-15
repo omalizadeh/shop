@@ -37,9 +37,12 @@
                     <div class="form-group col-lg-12">
                         <label for="default_category_id">دسته بندی پیش فرض</label>
                         <select class="form-control" name="default_category_id" required>
-                            <option value="0">دسته بندی پیش فرض...</option>
+                            <option value="">دسته بندی پیش فرض...</option>
                             @forelse($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->getName() }}</option>
+                            <option value="{{ $category->id }}" @if(isset($product) && $product->
+                                getDefaultCategory()->id === $category->id )
+                                selected
+                                @endif>{{ $category->getName() }}</option>
                             @empty
                             @endforelse
                         </select>

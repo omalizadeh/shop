@@ -15,6 +15,11 @@ class Feature extends Model
         return $this->belongsTo(FeatureGroup::class, 'feature_group_id');
     }
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'feature_product');
+    }
+
     public function getFeatureGroupId()
     {
         return $this->attributes['feature_group_id'];

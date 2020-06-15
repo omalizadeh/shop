@@ -8,7 +8,8 @@
                 @forelse($brands as $brand)
                 <div class="custom-control custom-checkbox mb-1">
                     <input type="radio" name="brand_id" value="{{ $brand->id }}" class="custom-control-input"
-                        id="{{ 'Brand' }}-{{ $loop->index }}">
+                        id="{{ 'Brand' }}-{{ $loop->index }}" @if(isset($product) && $product->getBrandId() ==
+                    $brand->id) checked @endif>
                     <label class="custom-control-label"
                         for="{{ 'Brand' }}-{{ $loop->index }}">{{ $brand->getName() }}</label>
                 </div>

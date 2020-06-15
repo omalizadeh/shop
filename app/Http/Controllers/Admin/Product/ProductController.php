@@ -42,7 +42,8 @@ class ProductController extends Controller
     {
         $categories = $this->categoryRepository->allProductCategories();
         $brands = $this->brandRepository->all();
-        return view('admins.products.create', compact('categories', 'brands'));
+        $features = $this->featureRepository->all();
+        return view('admins.products.create', compact('categories', 'brands', 'features'));
     }
 
     public function store(ProductStoreRequest $request)
@@ -51,13 +52,29 @@ class ProductController extends Controller
         if (!in_array($request->input('default_category_id'), $selectedCategories, true)) {
             $selectedCategories += $request->input('default_category_id');
         }
-        if ($request->input('slug') == null) {
+        if ($request->input('slug') === null) {
             $request->merge(['slug' => Str::slug($request->input('name'))]);
         }
+        $features = array_filter($request->input('features'));
         try {
-            DB::transaction(function () use ($request, $selectedCategories) {
-                $product = $this->productRepository->create($request->only(['name', 'description', 'brand_id', 'barcode', 'slug', 'meta_title', 'meta_description', 'insta_link', 'stock', 'price', 'weight']));
+            DB::transaction(function () use ($request, $selectedCategories, $features) {
+                $product = $this->productRepository->create($request->only([
+                    'name',
+                    'description',
+                    'brand_id',
+                    'barcode',
+                    'slug',
+                    'meta_title',
+                    'meta_description',
+                    'insta_link',
+                    'stock',
+                    'price',
+                    'weight'
+                ]));
                 $this->productRepository->syncCategories($product, $selectedCategories);
+                if (sizeof($features) > 0) {
+                    $this->productRepository->syncFeatures($product, self::setFeatureArray($features));
+                }
                 $this->productRepository->setDefaultCategory($product, $request->input('default_category_id'));
             });
             return redirect()->route('admins.products.index')->with('success', 'محصول ثبت شد.');
@@ -81,7 +98,39 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product)
     {
-        //
+        $selectedCategories = $request->input('category_ids');
+        if (!in_array($request->input('default_category_id'), $selectedCategories, true)) {
+            $selectedCategories += $request->input('default_category_id');
+        }
+        if ($request->input('slug') === null) {
+            $request->merge(['slug' => Str::slug($request->input('name'))]);
+        }
+        $features = array_filter($request->input('features'));
+        try {
+            DB::transaction(function () use ($request, $selectedCategories, $features, $product) {
+                $this->productRepository->update($request->only([
+                    'name',
+                    'description',
+                    'brand_id',
+                    'barcode',
+                    'slug',
+                    'meta_title',
+                    'meta_description',
+                    'insta_link',
+                    'stock',
+                    'price',
+                    'weight'
+                ]), $product->id);
+                $this->productRepository->syncCategories($product, $selectedCategories);
+                if (sizeof($features) > 0) {
+                    $this->productRepository->syncFeatures($product, self::setFeatureArray($features));
+                }
+                $this->productRepository->setDefaultCategory($product, $request->input('default_category_id'));
+            });
+            return redirect()->route('admins.products.index')->with('success', 'محصول بروزرسانی شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 
     public function destroy(Product $product)
@@ -102,5 +151,14 @@ class ProductController extends Controller
         } catch (\Exception $ex) {
             return redirect()->back()->with('fail', $ex->getMessage());
         }
+    }
+
+    public static function setFeatureArray(array $features)
+    {
+        $data = array();
+        foreach ($features as $key => $value) {
+            $data += [(int) $key => ['value' => $value]];
+        }
+        return $data;
     }
 }

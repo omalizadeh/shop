@@ -37,7 +37,12 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(ProductCategory::class, 'category_product', 'product_id', 'category_id');
+        return $this->belongsToMany(ProductCategory::class, 'category_product', 'product_id', 'category_id')->withPivot('is_default');
+    }
+
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class, 'feature_product')->withPivot('value');
     }
 
     public function tags()
@@ -137,6 +142,11 @@ class Product extends Model
         } else {
             return null;
         }
+    }
+
+    public function getDefaultCategory()
+    {
+        return $this->categories()->wherePivot('is_default', true)->first();
     }
 
     public function getDefaultCategoryName()
