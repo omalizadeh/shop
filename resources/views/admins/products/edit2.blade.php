@@ -14,7 +14,8 @@
     </div>
     <div class="card">
         <div class="card-body p-4 text-center">
-            <form method="post" action="{{ route('admins.products.update',$product->id)}}">
+            <form method="post" action="{{ route('admins.products.update',$product->id)}}"
+                enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="row">
@@ -73,6 +74,36 @@
                                 </div>
                             </div>
                         </div>
+                        @if(isset($product) && $product->images->count() > 0)
+                        <div class="page-header row no-gutters py-4">
+                            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                                <h3 class="page-title">
+                                    <i class="material-icons">perm_media</i>
+                                    تصاویر
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card card-small mb-3">
+                            <div class="card-body">
+                                <div class="row p-2">
+                                    @forelse($product->images as $image)
+                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-4" id="Media-{{ $image->id }}">
+                                        <div class="card card-small card-post card-post--1">
+                                            <div class="card-post__image"
+                                                style="background-image: url('{{ URL::to($image->getURL()) }}');">
+                                                <button class="card-post__category badge badge-pill badge-danger"
+                                                    onclick="event.preventDefault(); deleteImage('{{$image->id}}');"><i
+                                                        class="material-icons">remove_circle</i> حذف کردن </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    @endforelse
+                                </div>
+                            </div>
+                        </div>
+                        <!-- / Add New Post Form -->
+                        @endif
                         <div class="card card-small mb-3">
                             <div class="card-header border-bottom">
                                 <h6 class="m-0">
@@ -150,6 +181,17 @@
                                     value="{{$product->getBarcode()}}">
                             </div>
                         </div>
+                        <div class='card card-small mb-3'>
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">تصویر پیشفرض</h6>
+                                <small>( قابلیت انتخاب چند تصویر)</small>
+                            </div>
+                            <div class='card-body p-2'>
+                                <label for="images"></label>
+                                <input accept="image/jpeg,image/jpg,image/png,image/gif" type="file" id="images"
+                                    multiple name="images[]">
+                            </div>
+                        </div>
                         <!-- / Post Overview -->
                         <div id="Categories">
                             @include('admins.products.categories')
@@ -169,189 +211,30 @@
 @section('script')
 <script src="{{asset('panel-assets/tinymce/tinymce.min.js')}}"></script>
 <script src="{{asset('panel-assets/tinymce/editor.js')}}"></script>
-{{-- <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
 <script>
-    // CKEDITOR.replace('editor', {contentsLangDirection: 'rtl'});
-
-    //     function Media(method, media) {
-    //         if (method === 'delete') {
-    //             WarningTost('آیا واقعا میخواهید این تصویر را پاک کنید؟', function () {
-    //                 $.ajax({
-    //                     url: '{{ route('media.index') }}/' + media,
-// type: 'post',
-// data: {
-// _token: '{{ csrf_token() }}',
-// _method: '{{ 'delete' }}',
-// media: media
-// },
-// success: function (data) {
-// data.messages.forEach(function (key) {
-// iziToast.info({
-// message: key
-// });
-// });
-// $("#Media-" + media).remove();
-// },
-// error: function (data) {
-// data.messages.forEach(function (key) {
-// iziToast.info({
-// message: key
-// });
-// });
-// }
-// });
-// });
-// }
-// }
-
-// function AddCategory() {
-// var name, parent_id;
-// name = $('#CategoryName').val();
-// parent_id = $('#CategoryParent').val();
-// if (name === "") {
-// iziToast.error({
-// message: 'لطفا مقدار ارسالی خود را چک کنید'
-// });
-// } else {
-// $.ajax({
-// url: '{{ route('category.store') }}',
-// type: 'post',
-// data: {
-// _token: '{{ csrf_token() }}',
-// name: name,
-// model_type: 'App\\Product',
-// parent_id: parent_id,
-// },
-// success: function (data) {
-// $('#Categories').empty();
-// $('#Categories').append(data.view);
-// console.log([$('#Categories'), data.view]);
-// data.messages.forEach(function (key) {
-// iziToast.info({
-// message: key
-// });
-// });
-// }
-// });
-// }
-// }
-
-// function AddBrand() {
-// var name = $('#BrandName').val();
-// if (name === "") {
-// iziToast.error({
-// message: 'لطفا مقدار ارسالی خود را چک کنید'
-// });
-// } else {
-// $.ajax({
-// url: '{{ route('brand.store') }}',
-// type: 'post',
-// data: {
-// _token: '{{ csrf_token() }}',
-// name: name,
-// model_type: 'App\\Product',
-// },
-// success: function (data) {
-// $('#Brands').empty();
-// $('#Brands').append(data.view);
-// console.log([$('#Brands'), data.view]);
-// data.messages.forEach(function (key) {
-// iziToast.info({
-// message: key
-// });
-// });
-// }
-// });
-// }
-// }
-
-// function BarcodeCheck() {
-// $.ajax({
-// url: '{{ route('UniqueBarcode') }}',
-// type: 'post',
-// data: {
-// _token: '{{ csrf_token() }}',
-// barcode: $('#barcode').val()
-// },
-// success: function (data) {
-// if (data.result === true) {
-// $('#barcode').empty();
-// iziToast.error({
-// message: data.message
-// });
-// }
-// },
-// });
-// }
-
-// var optionsCount = 1;
-
-// function deleteInput(id) {
-// $('#input-type-' + id).remove();
-// }
-
-// function RemoveInput(row) {
-// $('#input-row-' + row).remove();
-// }
-
-// function AddInput(row) {
-// var Inputlength = $('#row-' + row).find('input').length;
-// var InputNumber = Inputlength / 2;
-// $('#row-' + row).append('<div class="form-row" id="input-row-' + InputNumber + '">' +
-    // '<div class="col-lg-6 form-group">' +
-        // '<label for="property">ویژگی</label>' +
-        // '<input class="form-control" id="property"
-            name="property[options][' + row + '][data][' + InputNumber + '][foo]" required="" type="text">' +
-        // '</div>' +
-    // '<div class="col-lg-6 form-group">' +
-        // '<label for="property">توضیحات</label>' +
-        // '<input class="form-control" id="property"
-            name="property[options][' + row + '][data][' + InputNumber + '][bar]" required="" type="text">' +
-        // '<span class="text-warning" onclick="RemoveInput(' + InputNumber + ')"><i class="fa fa-remove"></i>
-            <small>حدف کردن</small></span>' +
-        // '</div>');
-    // }
-
-    // function RemoveGroup(option) {
-    // $('#Option-' + option).remove();
-    // }
-
-    // function duplicator() {
-    // optionsCount = optionsCount + 1;
-    // $('#OptionsBox').append('<div class="row p-0" id="Option-' + optionsCount + '" parent_id="' + optionsCount + '">'
-        +
-        // ' <div class="col-lg-12 row">' +
-            // ' <div class="col-lg-12">' +
-                // ' <label for="property">' +
-                    // ' عنوان ویژگی' +
-                    // '<a onclick="RemoveGroup(' + optionsCount + ')" id="add"> [ - ] </a>' +
-                    // ' </label>' +
-                // ' <input required type="text" id="property" name="property[options][\'+optionsCount+\'][title]"
-                    class="form-control">' +
-                // ' </div>' +
-            // ' <div id="row-' + optionsCount + '" class="col-lg-12">' +
-                // ' <div class="row">' +
-                    // ' <div class="col-lg-6 form-group">' +
-                        // ' <label for="property">' +
-                            // ' ویژگی' +
-                            // ' </label>' +
-                        // ' <input required type="text" id="property"
-                            name="property[options][' + optionsCount + '][data][1][foo]" class="form-control">' +
-                        // ' </div>' +
-                    // ' <div class="col-lg-6 form-group">' +
-                        // ' <label for="property">توضیحات</label>' +
-                        // ' <input required type="text" id="property"
-                            name="property[options][' + optionsCount + '][data][1][bar]" class="form-control">' +
-                        // ' </div>' +
-                    // ' </div>' +
-                // ' </div>' +
-            // ' </div>' +
-        // ' <div class="col-lg-12">' +
-            // ' <button type="button" class="btn btn-sm btn-outline-accent rounded p-1 float-left"
-                onclick="AddInput(' + optionsCount + ')"><i class="fa fa-plus"></i> افزودن ویژگی </button>' +
-            // ' </div>' +
-        // '</div>');
-    // }
-    </script>
-    --}}
-    @endsection
+    function deleteImage(image) {
+                WarningTost('آیا واقعا میخواهید این تصویر را پاک کنید؟', function () {
+                    $.ajax({
+                        url: '{{ route('admins.images.index') }}/' + image,
+                        type: 'post',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            _method: '{{ 'delete' }}',
+                            image: image
+                        },
+                        success: function (res) {
+                                iziToast.success({
+                                    message: res.message
+                                });
+                            $("#Media-" + image).remove();
+                        },
+                        error: function (res) {
+                                iziToast.error({
+                                    message: res.message
+                                });
+                            }
+                    });
+                });
+        }
+</script>
+@endsection

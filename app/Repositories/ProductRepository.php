@@ -53,6 +53,16 @@ class ProductRepository implements ProductRepositoryInterface
         return $product->features()->sync($features);
     }
 
+    public function syncImages(Product $product, array $paths)
+    {
+        return $product->images()->saveMany($paths);
+    }
+
+    public function nextImagePosition(Product $product)
+    {
+        return $product->images()->max('position') + 1;
+    }
+
     public function setDefaultCategory(Product $product, $categoryId)
     {
         return $product->categories()->wherePivot('category_id', $categoryId)->update(['is_default' => true]);

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductStoreRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -28,7 +28,7 @@ class ProductStoreRequest extends FormRequest
             'insta_link' => 'nullable|url',
             'stock' => 'required|integer|gte:0',
             'price' => 'required|integer|gte:0',
-            'weight' => 'nullable|numeric|between:0.001,999.99',
+            'weight' => 'nullable|numeric|between:0.001,999.999',
             'on_sale' => 'required|in:0,1'
         ];
     }

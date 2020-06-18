@@ -32,6 +32,7 @@ Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function 
     Route::resource('roles', 'Admin\Role\RoleController');
     Route::resource('tags', 'Admin\Tag\TagController');
     Route::resource('transactions', 'Admin\Transaction\TransactionController');
+    Route::resource('images', 'Admin\Image\ImageController');
     Route::resource('addresses', 'Admin\Address\AddressController');
     Route::resource('users', 'Admin\User\UserController');
     Route::resource('messages', 'Admin\Message\MessageController');

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductStoreRequest;
+use App\Http\Requests\ProductUpdateRequest;
+use App\Image;
+use Intervention\Image\Facades\Image as ImageManager;
 use App\Product;
 use App\Repositories\Interfaces\BrandRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\FeatureRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -48,7 +50,6 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request)
     {
-        dd($request->all());
         $selectedCategories = $request->input('category_ids');
         if (!in_array($request->input('default_category_id'), $selectedCategories, true)) {
             $selectedCategories += $request->input('default_category_id');
@@ -58,7 +59,7 @@ class ProductController extends Controller
         }
         $features = array_filter($request->input('features'));
         try {
-            DB::transaction(function () use ($request, $selectedCategories, $features) {
+            $product = DB::transaction(function () use ($request, $selectedCategories, $features) {
                 $product = $this->productRepository->create($request->only([
                     'name',
                     'description',
@@ -77,7 +78,21 @@ class ProductController extends Controller
                     $this->productRepository->syncFeatures($product, self::setFeatureArray($features));
                 }
                 $this->productRepository->setDefaultCategory($product, $request->input('default_category_id'));
+                return $product;
             });
+            if ($request->hasFile('images')) {
+                $fileNames = array();
+                $pos = $this->productRepository->nextImagePosition($product);
+                foreach ($request->file('images') as $key => $file) {
+                    $img = ImageManager::make($file);
+                    $img->fit(500, 500);
+                    $path = Image::PRODUCT_IMAGE_DIR . '/' . Str::random(20) . '.jpg';
+                    $img->save('uploads/' . $path, 75);
+                    $image = new Image(['path' => $path, 'alt' => $product->getName(), 'position' => $pos + $key]);
+                    $fileNames[] = $image;
+                }
+                $this->productRepository->syncImages($product, $fileNames);
+            }
             return redirect()->route('admins.products.index')->with('success', 'محصول ثبت شد.');
         } catch (\Exception $ex) {
             return redirect()->back()->with('fail', $ex->getMessage());
@@ -97,7 +112,7 @@ class ProductController extends Controller
         return view('admins.products.edit2', compact('categories', 'brands', 'features', 'product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
         $selectedCategories = $request->input('category_ids');
         if (!in_array($request->input('default_category_id'), $selectedCategories, true)) {
@@ -128,6 +143,19 @@ class ProductController extends Controller
                 }
                 $this->productRepository->setDefaultCategory($product, $request->input('default_category_id'));
             });
+            if ($request->hasFile('images')) {
+                $fileNames = array();
+                $pos = $this->productRepository->nextImagePosition($product);
+                foreach ($request->file('images') as $key => $file) {
+                    $img = ImageManager::make($file);
+                    $img->fit(500, 500);
+                    $path = Image::PRODUCT_IMAGE_DIR . '/' . Str::random(20) . '.jpg';
+                    $img->save('uploads/' . $path, 75);
+                    $image = new Image(['path' => $path, 'alt' => $product->getName(), 'position' => $pos + $key]);
+                    $fileNames[] = $image;
+                }
+                $this->productRepository->syncImages($product, $fileNames);
+            }
             return redirect()->route('admins.products.index')->with('success', 'محصول بروزرسانی شد.');
         } catch (\Exception $ex) {
             return redirect()->back()->with('fail', $ex->getMessage());
@@ -136,7 +164,14 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        //
+        //// TODO: DELETE RELATED IMAGES
+        // 
+        try {
+            $this->productRepository->delete($product->id);
+            return redirect()->route('admins.products.index')->with('success', 'محصول حذف شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 
     public function changeStatus(Product $product)

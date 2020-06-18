@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    const IMAGES_TABLE = 'images';
+    const PRODUCT_IMAGE_DIR = 'product-images';
+
+    protected $fillable = ['path', 'alt', 'position', 'is_cover'];
+
     protected $casts = [
         'is_cover' => 'boolean'
     ];
@@ -15,9 +20,9 @@ class Image extends Model
         $this->morphTo('imageable');
     }
 
-    public function getName()
+    public function getPath()
     {
-        return $this->attributes['name'];
+        return $this->attributes['path'];
     }
 
     public function getAlt()
@@ -40,14 +45,8 @@ class Image extends Model
         return $this->attributes['imageable_type'];
     }
 
-    public function getPath()
+    public function getURL()
     {
-        $path = public_path('uploads');
-        switch ($this->getType()) {
-            case "App\Product":
-                return $path . 'products/' . $this->getName();
-            default:
-                return $path . $this->getName();
-        }
+        return "uploads/" . $this->getPath();
     }
 }

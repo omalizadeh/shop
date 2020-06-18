@@ -2,26 +2,25 @@
 
 namespace App\Http\Controllers\Admin\Image;
 
+use App\Http\Controllers\Controller;
 use App\Image;
+use App\Repositories\Interfaces\ImageRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $imageRepository;
+
+    public function __construct(ImageRepositoryInterface $imageRepository)
+    {
+        $this->imageRepository = $imageRepository;
+    }
+
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -80,6 +79,11 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        try {
+            $this->imageRepository->destroy($image);
+            return response()->json(['message' => 'عکس حذف شد.']);
+        } catch (\Exception $ex) {
+            return response()->json(['message', $ex->getMessage()], $ex->getCode());
+        }
     }
 }

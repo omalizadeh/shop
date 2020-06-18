@@ -1,239 +1,251 @@
 @extends('layouts.app')
 @section('title')
-    ویرایش محصول
+ویرایش محصول
 @endsection
 @section('content')
-    <div class="col-md-12">
-        <div class="page-header row no-gutters py-4">
-            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <h3 class="page-title">
-                    <i class="material-icons">local_printshop</i>
-                    افزودن محصول
-                </h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body p-4 text-center">
-                <form method="post"
-                      action="{{ isset($product) ?  route('product.update' , ['product' => $product->id ]) : route('product.store') }}"
-                      enctype="multipart/form-data">
-                    @csrf
-                    @if(isset($product))
-                        @method('PUT')
-                        <input type="hidden" value="refresh" name="redirect">
-                    @endif
-                    <div class="row">
-                        <div class="col-lg-8 col-md-12">
-                            <!-- Add New Post Form -->
-                            <div class="card card-small mb-3">
-                                <div class="card-body">
-                                    <div class="add-new-post">
-                                        <input name="title"
-                                               value="{{ isset($product) ? $product->title : old('title') }}"
-                                               class="form-control form-control-lg mb-3" type="text"
-                                               placeholder="عنوان پست جدید">
-                                        <textarea style="text-align: right;" placeholder="توضیحات" name="description"
-                                                  id="editor"
-                                                  class="mb-1">{{ isset($product) ? $product->description : old('description') }}</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            @if(isset($product) && $product->media->count() > 0)
-                                <div class="page-header row no-gutters py-4">
-                                    <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                                        <h3 class="page-title">
-                                            <i class="material-icons">perm_media</i>
-                                            تصاویر
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="card card-small mb-3">
-                                    <div class="card-body">
-                                        <div class="row p-2">
-                                            @forelse($product->media as $media)
-                                                <div class="col-lg-6 col-md-6 col-sm-12 mb-4"
-                                                     id="Media-{{ $media->id }}">
-                                                    <div class="card card-small card-post card-post--1">
-                                                        <div class="card-post__image"
-                                                             style="background-image: url('{{ asset($media->patch.$media->name) }}');">
-    <span onclick="Media('delete','{{ $media->id }}')"
-          class="card-post__category badge badge-pill badge-danger"><i
-                class="material-icons">remove_circle</i> حذف کردن </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                            @endforelse
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <!-- / Add New Post Form -->
-                            @endif
-                            <div class="card card-small mb-3">
-                                <div class="card-header">
-                                    <h6>
-                                        <span class="float-left">ویژگی ها</span>
-                                        {{--<small>--}}
-                                        {{--<button type="button" onclick="duplicator()"--}}
-                                        {{--class="btn btn-sm btn-outline-warning rounded p-1 float-right"--}}
-                                        {{--id="add">--}}
-                                        {{--<i class="fa fa-plus"></i>--}}
-                                        {{--افزودن لیست ویژگی--}}
-                                        {{--</button>--}}
-                                        {{--</small>--}}
-                                    </h6>
-                                </div>
-                                <div class="card-body" id="OptionsBox">
-                                    @forelse($product->property as $option)
-                                        <div class="row p-0" id="Option-{{ $loop->index }}" parent_id="{{ $loop->index }}">
-                                            <div class="col-lg-12 row">
-                                                <div class="col-lg-12">
-                                                    <label for="property">
-                                                        عنوان ویژگی
-                                                    </label>
-                                                    <input value="{{ $option['title'] }}" required type="text" id="property"
-                                                           name="property[options][{{ $loop->index }}][title]"
-                                                           class="form-control">
-                                                </div>
-                                                <div id="row-{{ $loop->index }}" class="col-lg-12">
-                                                    @forelse($option['data'] as $property)
-                                                        <div class="row">
-                                                            <div class="col-lg-6 form-group">
-                                                                <label for="property">
-                                                                    ویژگی
-                                                                </label>
-                                                                <input required type="text" id="property"  value="{{ $property['foo'] }}"
-                                                                       name="property[options][{{ $loop->parent->index }}][data][{{ $loop->index }}][foo]"
-                                                                       class="form-control">
-                                                            </div>
-                                                            <div class="col-lg-6 form-group">
-                                                                <label for="property">توضیحات</label>
-                                                                <input required type="text" value="{{ $property['bar'] }}" id="property"
-                                                                       name="property[options][{{ $loop->parent->index }}][data][{{ $loop->index }}][bar]"
-                                                                       class="form-control">
-                                                            </div>
-                                                        </div>
-                                                    @empty
-
-                                                    @endforelse
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <button type="button"
-                                                        class="btn btn-sm btn-outline-accent rounded p-1 float-left"
-                                                        onclick="AddInput({{ $loop->index }})"><i class="fa fa-plus"></i> افزودن ویژگی
-                                                </button>
-                                            </div>
-                                        </div>
-                                    @empty
-                                    @endforelse
-                                </div><!-- card -->
-                            </div>
-
-                            <div class="card card-small mb-3">
-                                <div class="card-header">
-                                    <h6>
-                                        <span class="float-left">تنظیمات سئو</span>
-                                    </h6>
-                                </div>
-                                <div class="card-body" id="SeoBox">
-                                    <div class="form-group">
-                                        <label for="SeoDescription">توضیحات سئو</label>
-                                        <textarea class="form-control" id="SeoDescription" name="property[Seo][description]" autocomplete="off" placeholder="توضیحات مختصر برای موتور های جستجوگر">@if(!empty($product->propertySeo)) {{ $product->propertySeo['description'] }} @endif</textarea>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-lg-6">
-                                            <label for="SeoTag">برچسب ها</label>
-                                            <input required type="text" class="form-control" id="SeoTag" name="property[Seo][tags]" autocomplete="off" value="@if(!empty($product->propertySeo)) {{ $product->propertySeo['tags'] }} @endif" placeholder="با , جدا شود">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <label for="InstagramTag">لینک اشتراک اینستاگرام</label>
-                                            <input type="url" class="form-control" id="InstagramTag" name="property[Seo][social][instagram]" autocomplete="off" value="@if(!empty($product->propertySeo)) {{ $product->propertySeo['social']['instagram'] }} @endif" placeholder="https://instagram.com">
-                                        </div>
-                                    </div>
-                                </div><!-- card -->
-                            </div>
-
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <!-- Post Overview -->
-                            <div class='card card-small mb-3'>
-                                <div class="card-header border-bottom">
-                                    <h6 class="m-0">ابزارها</h6>
-                                </div>
-                                <div class='card-body p-0'>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item p-3">
-                                         <span class="d-flex mb-2">
-                                        <i class="material-icons mr-1">flag</i>
-                                        <strong class="mr-1">وضعیت:</strong> {{ isset($product) ? $product->status_text : 'پیش نویس' }}
-                                         </span>
-                                       <span class="d-flex mb-2">
-                                        <i class="material-icons mr-1">visibility</i>
-                                        <strong class="mr-1">ارسال کننده</strong>
-                                        <strong class="text-success">{{ isset($product) ? $product->user->last_name .','.$product->user->name : auth()->user()->last_name . ', ' .auth()->user()->name }}</strong>
-                                         </span>
-                                        </li>
-                                        <li class="list-group-item p-3">
-                                            <label for="ProductStatus">وضیعت انتشار</label>
-                                            {{--'show', 'catalog', 'check', 'delete--}}
-                                            <select name="status" id="ProductStatus" class="form-control">
-                                                <option value="show">نمایش و فروش در سایت</option>
-                                                <option value="catalog">حالت کاتالوگ</option>
-                                                <option value="check">پیشنویس</option>
-                                            </select>
-                                        </li>
-                                        <li class="list-group-item d-flex px-3">
-                                            <button class="btn btn-sm btn-accent ml-auto" type="submit">
-                                                <i class="material-icons">file_copy</i> انتشار
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- / Post Overview -->
-                            <!-- Post Overview -->
-                            <div class='card card-small mb-3'>
-                                <div class="card-header border-bottom">
-                                    <h6 class="m-0">تصویر پیشفرض</h6>
-                                    <small>( قابلیت انتخاب چند تصویر)</small>
-                                </div>
-                                <div class='card-body p-2'>
-                                    <label for="photo"></label>
-                                    <input accept="image/jpeg,image/jpg,image/png,image/gif" type="file" id="photo"
-                                           multiple name="file[]">
-                                </div>
-                            </div>
-                            <div class='card card-small mb-3'>
-                                <div class="card-header border-bottom">
-                                    <h6 class="m-0">شناسه محصول</h6>
-                                </div>
-                                <div class='card-body p-2'>
-                                    <label for="barcode">شناسه محصول را وارد کنید</label>
-                                    <input type="text" value="{{ isset($product) ? $product->barcode : '' }}" required class="form-control" placeholder="مثال : 123456789"
-                                           name="barcode" onchange="BarcodeCheck()" id="barcode">
-                                </div>
-                            </div>
-                            <!-- / Post Overview -->
-                            <div id="Categories">
-                                @include('dashboard.category')
-                            </div>
-                            <div id="Brands">
-                                @include('dashboard.brand')
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+<div class="col-md-12">
+    <div class="page-header row no-gutters py-4">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <h3 class="page-title">
+                <i class="material-icons">local_printshop</i>
+                افزودن محصول
+            </h3>
         </div>
     </div>
+    <div class="card">
+        <div class="card-body p-4 text-center">
+            <form method="post"
+                action="{{ isset($product) ?  route('product.update' , ['product' => $product->id ]) : route('product.store') }}"
+                enctype="multipart/form-data">
+                @csrf
+                @if(isset($product))
+                @method('PUT')
+                <input type="hidden" value="refresh" name="redirect">
+                @endif
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <!-- Add New Post Form -->
+                        <div class="card card-small mb-3">
+                            <div class="card-body">
+                                <div class="add-new-post">
+                                    <input name="title" value="{{ isset($product) ? $product->title : old('title') }}"
+                                        class="form-control form-control-lg mb-3" type="text"
+                                        placeholder="عنوان پست جدید">
+                                    <textarea style="text-align: right;" placeholder="توضیحات" name="description"
+                                        id="editor"
+                                        class="mb-1">{{ isset($product) ? $product->description : old('description') }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                        @if(isset($product) && $product->media->count() > 0)
+                        <div class="page-header row no-gutters py-4">
+                            <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                                <h3 class="page-title">
+                                    <i class="material-icons">perm_media</i>
+                                    تصاویر
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card card-small mb-3">
+                            <div class="card-body">
+                                <div class="row p-2">
+                                    @forelse($product->media as $media)
+                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-4" id="Media-{{ $media->id }}">
+                                        <div class="card card-small card-post card-post--1">
+                                            <div class="card-post__image"
+                                                style="background-image: url('{{ asset($media->patch.$media->name) }}');">
+                                                <span onclick="Media('delete','{{ $media->id }}')"
+                                                    class="card-post__category badge badge-pill badge-danger"><i
+                                                        class="material-icons">remove_circle</i> حذف کردن </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @empty
+                                    @endforelse
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- / Add New Post Form -->
+                        @endif
+                        <div class="card card-small mb-3">
+                            <div class="card-header">
+                                <h6>
+                                    <span class="float-left">ویژگی ها</span>
+                                    {{--<small>--}}
+                                    {{--<button type="button" onclick="duplicator()"--}}
+                                    {{--class="btn btn-sm btn-outline-warning rounded p-1 float-right"--}}
+                                    {{--id="add">--}}
+                                    {{--<i class="fa fa-plus"></i>--}}
+                                    {{--افزودن لیست ویژگی--}}
+                                    {{--</button>--}}
+                                    {{--</small>--}}
+                                </h6>
+                            </div>
+                            <div class="card-body" id="OptionsBox">
+                                @forelse($product->property as $option)
+                                <div class="row p-0" id="Option-{{ $loop->index }}" parent_id="{{ $loop->index }}">
+                                    <div class="col-lg-12 row">
+                                        <div class="col-lg-12">
+                                            <label for="property">
+                                                عنوان ویژگی
+                                            </label>
+                                            <input value="{{ $option['title'] }}" required type="text" id="property"
+                                                name="property[options][{{ $loop->index }}][title]"
+                                                class="form-control">
+                                        </div>
+                                        <div id="row-{{ $loop->index }}" class="col-lg-12">
+                                            @forelse($option['data'] as $property)
+                                            <div class="row">
+                                                <div class="col-lg-6 form-group">
+                                                    <label for="property">
+                                                        ویژگی
+                                                    </label>
+                                                    <input required type="text" id="property"
+                                                        value="{{ $property['foo'] }}"
+                                                        name="property[options][{{ $loop->parent->index }}][data][{{ $loop->index }}][foo]"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="col-lg-6 form-group">
+                                                    <label for="property">توضیحات</label>
+                                                    <input required type="text" value="{{ $property['bar'] }}"
+                                                        id="property"
+                                                        name="property[options][{{ $loop->parent->index }}][data][{{ $loop->index }}][bar]"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+                                            @empty
+
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="button"
+                                            class="btn btn-sm btn-outline-accent rounded p-1 float-left"
+                                            onclick="AddInput({{ $loop->index }})"><i class="fa fa-plus"></i> افزودن
+                                            ویژگی
+                                        </button>
+                                    </div>
+                                </div>
+                                @empty
+                                @endforelse
+                            </div><!-- card -->
+                        </div>
+
+                        <div class="card card-small mb-3">
+                            <div class="card-header">
+                                <h6>
+                                    <span class="float-left">تنظیمات سئو</span>
+                                </h6>
+                            </div>
+                            <div class="card-body" id="SeoBox">
+                                <div class="form-group">
+                                    <label for="SeoDescription">توضیحات سئو</label>
+                                    <textarea class="form-control" id="SeoDescription" name="property[Seo][description]"
+                                        autocomplete="off"
+                                        placeholder="توضیحات مختصر برای موتور های جستجوگر">@if(!empty($product->propertySeo)) {{ $product->propertySeo['description'] }} @endif</textarea>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-6">
+                                        <label for="SeoTag">برچسب ها</label>
+                                        <input required type="text" class="form-control" id="SeoTag"
+                                            name="property[Seo][tags]" autocomplete="off"
+                                            value="@if(!empty($product->propertySeo)) {{ $product->propertySeo['tags'] }} @endif"
+                                            placeholder="با , جدا شود">
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label for="InstagramTag">لینک اشتراک اینستاگرام</label>
+                                        <input type="url" class="form-control" id="InstagramTag"
+                                            name="property[Seo][social][instagram]" autocomplete="off"
+                                            value="@if(!empty($product->propertySeo)) {{ $product->propertySeo['social']['instagram'] }} @endif"
+                                            placeholder="https://instagram.com">
+                                    </div>
+                                </div>
+                            </div><!-- card -->
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <!-- Post Overview -->
+                        <div class='card card-small mb-3'>
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">ابزارها</h6>
+                            </div>
+                            <div class='card-body p-0'>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item p-3">
+                                        <span class="d-flex mb-2">
+                                            <i class="material-icons mr-1">flag</i>
+                                            <strong class="mr-1">وضعیت:</strong>
+                                            {{ isset($product) ? $product->status_text : 'پیش نویس' }}
+                                        </span>
+                                        <span class="d-flex mb-2">
+                                            <i class="material-icons mr-1">visibility</i>
+                                            <strong class="mr-1">ارسال کننده</strong>
+                                            <strong
+                                                class="text-success">{{ isset($product) ? $product->user->last_name .','.$product->user->name : auth()->user()->last_name . ', ' .auth()->user()->name }}</strong>
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item p-3">
+                                        <label for="ProductStatus">وضیعت انتشار</label>
+                                        {{--'show', 'catalog', 'check', 'delete--}}
+                                        <select name="status" id="ProductStatus" class="form-control">
+                                            <option value="show">نمایش و فروش در سایت</option>
+                                            <option value="catalog">حالت کاتالوگ</option>
+                                            <option value="check">پیشنویس</option>
+                                        </select>
+                                    </li>
+                                    <li class="list-group-item d-flex px-3">
+                                        <button class="btn btn-sm btn-accent ml-auto" type="submit">
+                                            <i class="material-icons">file_copy</i> انتشار
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- / Post Overview -->
+                        <!-- Post Overview -->
+                        <div class='card card-small mb-3'>
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">تصویر پیشفرض</h6>
+                                <small>( قابلیت انتخاب چند تصویر)</small>
+                            </div>
+                            <div class='card-body p-2'>
+                                <label for="photo"></label>
+                                <input accept="image/jpeg,image/jpg,image/png,image/gif" type="file" id="photo" multiple
+                                    name="file[]">
+                            </div>
+                        </div>
+                        <div class='card card-small mb-3'>
+                            <div class="card-header border-bottom">
+                                <h6 class="m-0">شناسه محصول</h6>
+                            </div>
+                            <div class='card-body p-2'>
+                                <label for="barcode">شناسه محصول را وارد کنید</label>
+                                <input type="text" value="{{ isset($product) ? $product->barcode : '' }}" required
+                                    class="form-control" placeholder="مثال : 123456789" name="barcode"
+                                    onchange="BarcodeCheck()" id="barcode">
+                            </div>
+                        </div>
+                        <!-- / Post Overview -->
+                        <div id="Categories">
+                            @include('dashboard.category')
+                        </div>
+                        <div id="Brands">
+                            @include('dashboard.brand')
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('script')
-    <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
-    <script>
-        CKEDITOR.replace('editor', {contentsLangDirection: 'rtl'});
+<script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor', {contentsLangDirection: 'rtl'});
 
         function Media(method, media) {
             if (method === 'delete') {
@@ -406,5 +418,5 @@
                 '  </div>' +
                 '</div>');
         }
-    </script>
+</script>
 @endsection
