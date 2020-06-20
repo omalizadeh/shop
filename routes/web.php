@@ -45,13 +45,14 @@ Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function 
     Route::get('products/{product}/change-status', 'Admin\Product\ProductController@changeStatus')->name('products.change_status');
 });
 
+Route::resource('products', 'Front\Product\ProductController', ['except' => 'show']);
+Route::get('products/{product:slug}', 'Front\Product\ProductController')->name('products.show');
 Route::resource('brands', 'Front\Brand\BrandController');
 Route::resource('articles', 'Front\Article\ArticleController');
 Route::resource('carts', 'Front\Cart\CartController');
 Route::resource('cities', 'Front\City\CityController');
 Route::resource('coupons', 'Front\Coupon\CouponController');
 Route::resource('deliveries', 'Front\Delivery\DeliveryController');
-Route::resource('products', 'Front\Product\ProductController');
 Route::resource('provinces', 'Front\Province\ProvinceController');
 Route::resource('reviews', 'Front\Review\ReviewController');
 

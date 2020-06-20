@@ -158,4 +158,9 @@ class Product extends Model
             return null;
         }
     }
+
+    public function hasImages()
+    {
+        return $this->images()->count() > 0;
+    }
 }

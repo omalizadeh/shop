@@ -3,11 +3,19 @@
 namespace App\Repositories;
 
 use App\Product;
+use App\Repositories\Interfaces\ImageRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 class ProductRepository implements ProductRepositoryInterface
 {
+    private $imageRepository;
+
+    public function __construct(ImageRepositoryInterface $imageRepository)
+    {
+        $this->imageRepository = $imageRepository;
+    }
+
     public function all()
     {
         return Product::all();
@@ -16,6 +24,11 @@ class ProductRepository implements ProductRepositoryInterface
     public function paginate($perPage)
     {
         return Product::paginate($perPage);
+    }
+
+    public function paginateActive($perPage)
+    {
+        return Product::where('is_active', true)->paginate($perPage);
     }
 
     public function except(array $ids)
@@ -66,5 +79,18 @@ class ProductRepository implements ProductRepositoryInterface
     public function setDefaultCategory(Product $product, $categoryId)
     {
         return $product->categories()->wherePivot('category_id', $categoryId)->update(['is_default' => true]);
+    }
+
+    public function destroy(Product $product)
+    {
+        return DB::transaction(function () use ($product) {
+            $images = $product->images;
+            if ($images->count() > 0) {
+                foreach ($images as $image) {
+                    $this->imageRepository->destroy($image);
+                }
+            }
+            $this->delete($product->id);
+        });
     }
 }

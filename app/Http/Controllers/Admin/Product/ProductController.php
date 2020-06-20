@@ -86,8 +86,8 @@ class ProductController extends Controller
                 foreach ($request->file('images') as $key => $file) {
                     $img = ImageManager::make($file);
                     $img->fit(500, 500);
-                    $path = Image::PRODUCT_IMAGE_DIR . '/' . Str::random(20) . '.jpg';
-                    $img->save('uploads/' . $path, 75);
+                    $path = Image::PRODUCT_IMAGE_DIR . '/' . time() . Str::random(10) . '.jpg';
+                    $img->save('uploads/' . $path, 80);
                     $image = new Image(['path' => $path, 'alt' => $product->getName(), 'position' => $pos + $key]);
                     $fileNames[] = $image;
                 }
@@ -109,7 +109,7 @@ class ProductController extends Controller
         $categories = $this->categoryRepository->allProductCategories();
         $brands = $this->brandRepository->all();
         $features = $this->featureRepository->all();
-        return view('admins.products.edit2', compact('categories', 'brands', 'features', 'product'));
+        return view('admins.products.edit', compact('categories', 'brands', 'features', 'product'));
     }
 
     public function update(ProductUpdateRequest $request, Product $product)
@@ -149,8 +149,8 @@ class ProductController extends Controller
                 foreach ($request->file('images') as $key => $file) {
                     $img = ImageManager::make($file);
                     $img->fit(500, 500);
-                    $path = Image::PRODUCT_IMAGE_DIR . '/' . Str::random(20) . '.jpg';
-                    $img->save('uploads/' . $path, 75);
+                    $path = Image::PRODUCT_IMAGE_DIR . '/' . time() . Str::random(10) . '.jpg';
+                    $img->save('uploads/' . $path, 80);
                     $image = new Image(['path' => $path, 'alt' => $product->getName(), 'position' => $pos + $key]);
                     $fileNames[] = $image;
                 }
@@ -164,11 +164,9 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        //// TODO: DELETE RELATED IMAGES
-        // 
         try {
-            $this->productRepository->delete($product->id);
-            return redirect()->route('admins.products.index')->with('success', 'محصول حذف شد.');
+            $this->productRepository->destroy($product);
+            return redirect()->route('admins.products.index')->with('success', 'محصول به همراه تصاویر حذف شد.');
         } catch (\Exception $ex) {
             return redirect()->back()->with('fail', $ex->getMessage());
         }

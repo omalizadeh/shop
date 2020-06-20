@@ -4,18 +4,28 @@ namespace App\Http\Controllers\Front\Product;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Repositories\Interfaces\BrandRepositoryInterface;
+use App\Repositories\Interfaces\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $productRepository;
+    private $brandRepository;
+
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        BrandRepositoryInterface $brandRepository
+    ) {
+        $this->productRepository = $productRepository;
+        $this->brandRepository = $brandRepository;
+    }
+
     public function index()
     {
-        //
+        $products = $this->productRepository->paginateActive(20);
+        $brands = $this->brandRepository->all();
+        return view('products', compact('products', 'brands'));
     }
 
     /**
