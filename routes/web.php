@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/', 'Front\Home\IndexController@index')->name('index');
 
-//// TODO: MUST CHANGE ROUTE TO RANDOM STRING -----
+//// TODO: MUST CHANGE ADMIN ROUTE TO RANDOM STRING -----
 //
 Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function () {
     Route::get('', 'Admin\Home\IndexController@index')->name('index');
@@ -46,7 +46,9 @@ Route::prefix('admins/')->as('admins.')->middleware('operator')->group(function 
 });
 
 Route::resource('products', 'Front\Product\ProductController', ['except' => 'show']);
-Route::get('products/{product:slug}', 'Front\Product\ProductController')->name('products.show');
+Route::get('products/{product:slug}', 'Front\Product\ProductController@show')->name('products.show');
+Route::resource('categories', 'Front\Category\CategoryController', ['except' => 'show']);
+Route::get('categories/{category:slug}', 'Front\Category\CategoryController@show')->name('categories.show');
 Route::resource('brands', 'Front\Brand\BrandController');
 Route::resource('articles', 'Front\Article\ArticleController');
 Route::resource('carts', 'Front\Cart\CartController');

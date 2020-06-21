@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front\Product;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Repositories\Interfaces\BrandRepositoryInterface;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -12,20 +13,24 @@ class ProductController extends Controller
 {
     private $productRepository;
     private $brandRepository;
+    private $categoryRepository;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
-        BrandRepositoryInterface $brandRepository
+        BrandRepositoryInterface $brandRepository,
+        CategoryRepositoryInterface $categoryRepository
     ) {
         $this->productRepository = $productRepository;
         $this->brandRepository = $brandRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function index()
     {
         $products = $this->productRepository->paginateActive(20);
         $brands = $this->brandRepository->all();
-        return view('products', compact('products', 'brands'));
+        $categories = $this->categoryRepository->allProductCategories();
+        return view('products', compact('products', 'brands', 'categories'));
     }
 
     /**
