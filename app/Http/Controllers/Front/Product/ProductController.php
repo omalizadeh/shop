@@ -6,23 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Repositories\Interfaces\BrandRepositoryInterface;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Interfaces\FeatureGroupRepositoryInterface;
 use App\Repositories\Interfaces\ProductRepositoryInterface;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     private $productRepository;
     private $brandRepository;
     private $categoryRepository;
+    private $featureGroupRepository;
 
     public function __construct(
         ProductRepositoryInterface $productRepository,
         BrandRepositoryInterface $brandRepository,
-        CategoryRepositoryInterface $categoryRepository
+        CategoryRepositoryInterface $categoryRepository,
+        FeatureGroupRepositoryInterface $featureGroupRepository
     ) {
         $this->productRepository = $productRepository;
         $this->brandRepository = $brandRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->featureGroupRepository = $featureGroupRepository;
     }
 
     public function index()
@@ -33,69 +36,12 @@ class ProductController extends Controller
         return view('products', compact('products', 'brands', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function show(Product $product)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+        if (!$product->isActive()) {
+            abort(404);
+        }
+        $featureGroups = $this->featureGroupRepository->allOrderBy('position');
+        return view('product', compact('product', 'featureGroups'));
     }
 }

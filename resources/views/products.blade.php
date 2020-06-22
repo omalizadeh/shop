@@ -86,7 +86,7 @@
                                 <a
                                     href="{{ route('products.show' , $product->getSlug()) }}">{{ $product->getName() }}</a>
                             </h5>
-                            @if(!$product->getPrice() > 0 || !$product->isOnSale())
+                            @if(!$product->isOnSale() || !$product->getStock() >0)
                             <span class="product-price text-danger">ناموجود</span>
                             @else
                             <span

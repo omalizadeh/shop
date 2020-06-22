@@ -42,7 +42,7 @@ class Product extends Model
 
     public function features()
     {
-        return $this->belongsToMany(Feature::class, 'feature_product')->withPivot('value');
+        return $this->belongsToMany(Feature::class, 'feature_product')->withPivot('value')->orderBy('position', 'ASC');
     }
 
     public function tags()

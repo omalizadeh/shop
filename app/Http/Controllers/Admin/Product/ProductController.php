@@ -135,7 +135,8 @@ class ProductController extends Controller
                     'insta_link',
                     'stock',
                     'price',
-                    'weight'
+                    'weight',
+                    'on_sale'
                 ]), $product->id);
                 $this->productRepository->syncCategories($product, $selectedCategories);
                 if (sizeof($features) > 0) {
