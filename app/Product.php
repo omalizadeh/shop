@@ -35,6 +35,11 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class);
+    }
+
     public function categories()
     {
         return $this->belongsToMany(ProductCategory::class, 'category_product', 'product_id', 'category_id')->withPivot('is_default');

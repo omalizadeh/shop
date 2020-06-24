@@ -51,11 +51,12 @@ Route::resource('categories', 'Front\Category\CategoryController', ['except' => 
 Route::get('categories/{category:slug}', 'Front\Category\CategoryController@show')->name('categories.show');
 Route::resource('brands', 'Front\Brand\BrandController');
 Route::resource('articles', 'Front\Article\ArticleController');
-Route::resource('carts', 'Front\Cart\CartController');
 Route::resource('cities', 'Front\City\CityController');
 Route::resource('coupons', 'Front\Coupon\CouponController');
 Route::resource('deliveries', 'Front\Delivery\DeliveryController');
 Route::resource('provinces', 'Front\Province\ProvinceController');
 Route::resource('reviews', 'Front\Review\ReviewController');
+
+Route::post('carts/add-product', 'Front\Cart\CartController@addProduct')->name('carts.add_product');
 
 Auth::routes();

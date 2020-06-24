@@ -2,85 +2,34 @@
 
 namespace App\Http\Controllers\Front\Cart;
 
-use App\Cart;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\AddToCartRequest;
+use App\Http\Requests\removeFromCartRequest;
+use App\Repositories\Interfaces\CartRepositoryInterface;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private $cartRepository;
+
+    public function __construct(CartRepositoryInterface $cartRepository)
     {
-        //
+        $this->cartRepository = $cartRepository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function addProduct(AddToCartRequest $request)
     {
-        //
+        if (auth()->guest()) {
+            return response()->json(['message' => 'برای خرید ابتدا در سایت ثبت نام کنید.']);
+        }
+        try {
+            $this->cartRepository->addProduct($request->input('product_id'));
+            return response()->json(['message' => 'محصول به سبد خرید اضافه شد.']);
+        } catch (\Exception $ex) {
+            return response()->json(['message' => $ex->getMessage()]);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function removeProduct(removeFromCartRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Cart  $cart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cart $cart)
-    {
-        //
     }
 }

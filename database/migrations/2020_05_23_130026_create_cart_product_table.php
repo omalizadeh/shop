@@ -6,29 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCartProductTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('cart_product', function (Blueprint $table) {
             $table->unsignedBigInteger('cart_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedSmallInteger('quantity')->default(1);
-            $table->unsignedInteger('total');
+            $table->unsignedInteger('total_price');
 
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('cart_product');

@@ -9,6 +9,13 @@ class Cart extends Model
 {
     use FarsiTimestamps;
 
+    const CARTS_TABLE = 'carts';
+
+    protected $fillable = [
+        'user_id',
+        'total'
+    ];
+
     protected $casts = [
         'is_ordered' => 'boolean'
     ];
@@ -16,6 +23,11 @@ class Cart extends Model
     public function customer()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
 
     public function getUserId()

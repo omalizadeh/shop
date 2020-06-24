@@ -77,7 +77,7 @@
         </div> --}}
         <div class="col-sm-6">
             @if($product->isOnSale() && $product->getStock() > 0)
-            <button class="btn btn-primary btn-block m-0" onclick="AddToCart({{ $product->id }})">
+            <button class="btn btn-primary btn-block m-0" onclick="addToCart({{ $product->id }})">
                 <i class="fe-icon-shopping-cart"></i> خرید
             </button>
             @else
@@ -287,6 +287,23 @@
 @endsection
 @section('head')
 <meta name=description content="{{ $product->getMetaDescription() }}">
+<script>
+    function addToCart(id) {
+            $.ajax({
+                url: '{{ route('carts.add_product') }}',
+                type: '{{ 'Post' }}',
+                data: { _token: '{{ csrf_token() }}', product_id: id },
+                success:function (data) {
+                   alert(data.message);
+                   $('#CartBadge').empty().append(data.data.count);
+                },
+                error:function (data) {
+                    console.log(data);
+                    danger(data.responseJSON.message);
+                }
+            });
+        }
+</script>
 {{-- @if($product->propertySeo)
 @forelse($product->propertySeo['Tags'] as $tag)
 <meta name=keywords itemprop=keywords content="{{ $tag }}">
@@ -358,22 +375,7 @@
     });
 </script>
 <script>
-    function AddToCart(id) {
-            $.ajax({
-                url: '{{ route('cart.store') }}',
-                type: '{{ 'Post' }}',
-                data: { _token: '{{ csrf_token() }}', product_id: id },
-                success:function (data) {
-                   alert(data.message);
-                   $('#CartBadge').empty().append(data.data.count);
-                },
-                error:function (data) {
-                    console.log(data);
-                    danger(data.responseJSON.message);
-                }
-            });
-        }
-        function AddToFavorite() {
+    function AddToFavorite() {
             @if(auth()->guest())
                 alert("برای این کار باید وارد شوید!");
             @else
