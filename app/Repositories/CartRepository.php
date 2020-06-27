@@ -34,6 +34,11 @@ class CartRepository implements CartRepositoryInterface
         return DB::table(Cart::CARTS_TABLE)->delete($id);
     }
 
+    public function openCart()
+    {
+        return Cart::firstOrCreate(['user_id' => auth()->user()->id, 'is_ordered' => false]);
+    }
+
     public function findById($id)
     {
         return Cart::findOrFail($id);

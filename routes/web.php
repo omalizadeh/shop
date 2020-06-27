@@ -57,6 +57,7 @@ Route::resource('deliveries', 'Front\Delivery\DeliveryController');
 Route::resource('provinces', 'Front\Province\ProvinceController');
 Route::resource('reviews', 'Front\Review\ReviewController');
 
-Route::post('carts/add-product', 'Front\Cart\CartController@addProduct')->name('carts.add_product');
+Route::post('cart/add-product', 'Front\Cart\CartController@addProduct')->name('carts.add_product');
+Route::get('cart', 'Front\Cart\CartController@show')->name('carts.show');
 
 Auth::routes();

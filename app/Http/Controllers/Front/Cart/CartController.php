@@ -32,4 +32,13 @@ class CartController extends Controller
     public function removeProduct(removeFromCartRequest $request)
     {
     }
+
+    public function show()
+    {
+        if (auth()->guest()) {
+            abort(404);
+        }
+        $cart = $this->cartRepository->openCart();
+        return view('cart', compact('cart'));
+    }
 }
