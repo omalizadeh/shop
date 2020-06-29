@@ -4,83 +4,53 @@ namespace App\Http\Controllers\Admin\Carrier;
 
 use App\Carrier;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\CarrierRequest;
 
 class CarrierController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $carriers = Carrier::all();
+        return view('admins.carriers.index', compact('carriers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('admins.carriers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CarrierRequest $request)
     {
-        //
+        try {
+            Carrier::create($request->only(['name']));
+            return redirect()->route('admins.carriers.index')->with('success', 'حامل افزوده شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Carrier  $carrier
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Carrier $carrier)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Carrier  $carrier
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Carrier $carrier)
     {
-        //
+        return view('admins.carriers.edit', compact('carrier'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Carrier  $carrier
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Carrier $carrier)
+    public function update(CarrierRequest $request, Carrier $carrier)
     {
-        //
+        try {
+            $carrier->update($request->only(['name']));
+            return redirect()->route('admins.carriers.index')->with('success', 'حامل ویرایش شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Carrier  $carrier
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Carrier $carrier)
     {
-        //
+        try {
+            $carrier->delete();
+            return redirect()->route('admins.carriers.index')->with('success', 'حامل حذف شد.');
+        } catch (\Exception $ex) {
+            return redirect()->back()->with('fail', $ex->getMessage());
+        }
     }
 }
